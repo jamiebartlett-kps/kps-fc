@@ -2780,6 +2780,7 @@ details[open] > .header__submenu {
 
   .header--top-center .header__inline-menu > .list-menu--inline {
     justify-content: center;
+    gap: 2rem;
   }
 
   .header--middle-left .header__inline-menu {
@@ -2795,19 +2796,45 @@ details[open] > .header__submenu {
   padding: 1.2rem;
   text-decoration: none;
   color: rgba(var(--color-foreground), 0.75);
+
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 400;
+  position: relative;
 }
 
 .header__menu-item:hover {
-  color: rgb(var(--color-foreground));
+  color: #7A263A;
 }
 
 .header__menu-item span {
-  transition: text-decoration var(--duration-short) ease;
+  /* Remove text-decoration transition, handled by underline animation */
 }
 
 .header__menu-item:hover span {
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
+  /* Remove default underline, handled by pseudo-element */
+}
+
+.header__active-menu-item::after, .header__menu-item::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: 0.2em;
+  width: 0;
+  height: 2px;
+  background: 'currentColor';
+  transition: width 0.3s cubic-bezier(0.4,0,0.2,1), left 0.3s cubic-bezier(0.4,0,0.2,1);
+  transform: translateX(-50%);
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+.header__active-menu-item::after, .header__menu-item:hover::after {
+  background: #7A263A;
+  width: 100%;
+  left: 0;
+  transform: none;
 }
 
 details[open] > .header__menu-item {
@@ -2825,8 +2852,8 @@ details[open] > .header__menu-item .icon-caret {
 .header__active-menu-item {
   transition: text-decoration-thickness var(--duration-short) ease;
   color: rgb(var(--color-foreground));
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
+  /* text-decoration: underline;
+  text-underline-offset: 0.3rem; */
 }
 
 .header__menu-item:hover .header__active-menu-item {

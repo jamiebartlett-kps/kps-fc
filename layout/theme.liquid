@@ -99,8 +99,16 @@
         background-color: rgb(var(--color-background));
       }
 
+      @font-face {
+        font-family: 'BoleynGate IronSans';
+        src: url('{{ 'BoleynGate-IronSans.woff2' | asset_url }}') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
       :root {
-        --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+        --font-body-family: 'BoleynGate IronSans', {{ settings.type_body_font.fallback_families }};
         --font-body-style: {{ settings.type_body_font.style }};
         --font-body-weight: {{ settings.type_body_font.weight }};
         --font-body-weight-bold: {{ settings.type_body_font.weight | plus: 300 | at_most: 1000 }};
