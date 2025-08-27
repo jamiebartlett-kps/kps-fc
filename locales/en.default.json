@@ -261,6 +261,13 @@
         "error_heading": "Please adjust the following:"
       }
     },
+    "kit": {
+      "custom" : {
+        "name" : "Name",
+        "number" : "Number",
+        "player" : "Player"
+      }
+    },
     "404": {
       "title": "Page not found",
       "subtext": "404"

@@ -1,0 +1,48 @@
+<script src="{{ 'kit-customisation.js' | asset_url }}" defer="defer"></script>
+<div class="kit-customisation-form">
+  <button
+    type="button"
+    name="show_kit_customisation"
+    class="product-form__customisation button button--full-width button--primary mb-3"
+  >
+    <span class="svg-wrapper">{{ 'icon-edit.svg' | inline_asset_content }}</span> Add Personalisation
+  </button>
+  <div class="kit-customisation-fields" style="display: none;">
+    <p>Personalise your shirt</p>
+    <div class="field">
+      <select
+        class="field__input"
+        id="kit-customisation-player"
+      >
+        <option value="">Select an option</option>
+        {% for player in shop.metafields.custom.players.value %}
+          <option data-name="{{ player.name | escape }}" data-number="{{ player.number | escape }}">{{ player.number }}. {{ player.name }}</option>
+        {% endfor %}
+        <option>Custom</option>
+      </select>
+      <label class="field__label" for="kit-customisation-player">{{ 'templates.kit.custom.player' | t }}</label>
+    </div>
+    <div class="field">
+      <input
+        class="field__input"
+        name="properties[Name]"
+        type="text"
+        id="kit-customisation-name"
+        name="contact[{{ 'templates.kit.custom.name' | t }}]"
+        placeholder="{{ 'templates.kit.custom.name' | t }}"
+      >
+      <label class="field__label" for="kit-customisation-name">{{ 'templates.kit.custom.name' | t }}</label>
+    </div>
+    <div class="field">
+      <input
+        class="field__input"
+        name="properties[Number]"
+        type="number"
+        id="kit-customisation-number"
+        name="contact[{{ 'templates.kit.custom.number' | t }}]"
+        placeholder="{{ 'templates.kit.custom.number' | t }}"
+      >
+      <label class="field__label" for="kit-customisation-number">{{ 'templates.kit.custom.number' | t }}</label>
+    </div>
+  </div>
+</div>

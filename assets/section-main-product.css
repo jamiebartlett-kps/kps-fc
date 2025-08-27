@@ -193,6 +193,26 @@ product-info {
   margin-bottom: 1rem;
 }
 
+.product-form__customisation {
+  margin-bottom: 1rem;
+}
+
+.product-form__customisation .svg-wrapper {
+  color: #fff;
+}
+
+.kit-customisation-fields {
+  margin-bottom: 1rem;
+}
+
+.kit-customisation-fields .field {
+  margin-bottom: 2rem;
+}
+
+.kit-customisation-fields .field__input:disabled {
+  color: grey;
+}
+
 .product-form__submit[aria-disabled='true'] + .shopify-payment-button .shopify-payment-button__button[disabled],
 .product-form__submit[disabled] + .shopify-payment-button .shopify-payment-button__button[disabled] {
   cursor: not-allowed;
