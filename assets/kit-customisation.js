@@ -56,7 +56,9 @@ document.addEventListener('DOMContentLoaded', function () {
             // Get the metafield image URL from the hidden div
             var nameInput = form.querySelector('#kit-customisation-name');
             var numberInput = form.querySelector('#kit-customisation-number');
-            let imageUrl = `https://shop.whufc.com/_rearview-image.php?id=13762&lettering=${nameInput.value}&numbering=${numberInput.value}&align=570&colr=2&perscolr=2&numalign=250&offset=0&namefsz=45&numfsz=170&namef=PL23-Lettering.ttf&nameffirstchar=&offset_firstchar=0&numf=PL-White&maxw=380&lgap=1&rad=160&xaxis=290&numgap=0&spos=182&calign=540&stroke_width=1&stroke_col=1&font=4&csrf=qZ314BhrchNrLNOa5f7ktFIGfjj9u9FZJQjiabHtA1I=&player=false&playerimgsrc=&caps=true&font_folder=`
+            var backImage = document.querySelector('#back-image');
+
+            let imageUrl = `${backImage.getAttribute('data-image')}&lettering=${nameInput.value}&numbering=${numberInput.value}`
 
             // Find the main image in the media gallery and update its src
             var galleryImg = document.querySelector('.product__media-list .product__media-item img');

@@ -78,7 +78,7 @@
       <!-- Place this in your product template or near your gallery -->
       {% if product.metafields.custom.back_image %}
         <div id="back-image" style="display:none;" 
-            data-image="{{ product.metafields.custom.back_image | img_url: 'master' }}">
+            data-image="{{ product.metafields.custom.back_image }}">
         </div>
       {% endif %}
       <div class="grid__item product__media-wrapper">
