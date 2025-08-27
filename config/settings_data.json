@@ -194,9 +194,9 @@
       },
       "scheme-aae4f118-f077-4959-acbd-493da178dae6": {
         "settings": {
-          "background": "#ffffff",
+          "background": "{{ shop.brand.colors.primary[0].background }}",
           "background_gradient": "",
-          "text": "{{ shop.brand.colors.primary[0].background }}",
+          "text": "#FFFFFF",
           "button": "{{ shop.brand.colors.primary[0].background }}",
           "button_label": "{{ shop.brand.colors.secondary[0].background }}",
           "secondary_button_label": "{{ shop.brand.colors.primary[0].background }}",
