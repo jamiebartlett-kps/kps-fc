@@ -15,14 +15,14 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Back To School",
+            "heading": "Skate Fashion",
             "heading_size": "h0"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "Junior Hammers",
+            "text": "Fresh Threads for the Streets",
             "text_style": "body"
           }
         },
@@ -44,9 +44,9 @@
         "button"
       ],
       "settings": {
-        "image": "shopify://shop_images/1203.jpg",
+        "image": "shopify://shop_images/photo-1692977121343-71e195b7cda9.png",
         "image_overlay_opacity": 40,
-        "image_height": "large",
+        "image_height": "medium",
         "image_behavior": "none",
         "desktop_content_position": "bottom-center",
         "desktop_content_alignment": "center",
@@ -55,74 +55,6 @@
         "stack_images_on_mobile": false,
         "mobile_content_alignment": "center",
         "show_text_below": false
-      }
-    },
-    "multicolumn_kDKq8z": {
-      "type": "multicolumn",
-      "blocks": {
-        "column_bUxMkF": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/1838.jpg",
-            "title": "",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_Dyy4zN": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/1839.jpg",
-            "title": "",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_jagjxU": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/1840.jpg",
-            "title": "",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_C3qQGt": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/1841.jpg",
-            "title": "",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column_bUxMkF",
-        "column_Dyy4zN",
-        "column_jagjxU",
-        "column_C3qQGt"
-      ],
-      "name": "t:sections.multicolumn.presets.name",
-      "settings": {
-        "title": "",
-        "heading_size": "h2",
-        "image_width": "full",
-        "image_ratio": "portrait",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 4,
-        "column_alignment": "center",
-        "background_style": "primary",
-        "color_scheme": "",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
       }
     },
     "collage": {
@@ -234,7 +166,6 @@
   },
   "order": [
     "image_banner",
-    "multicolumn_kDKq8z",
     "collage",
     "video",
     "multicolumn"
