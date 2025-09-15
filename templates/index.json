@@ -63,20 +63,20 @@
         "collection-0": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "adidas"
           }
         },
         "product": {
           "type": "product",
           "settings": {
-            "product": "",
+            "product": "adidas-classic-backpack",
             "second_image": false
           }
         },
         "collection-1": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "men"
           }
         }
       },
@@ -102,7 +102,8 @@
         "heading": "",
         "heading_size": "h1",
         "enable_video_looping": false,
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "video_url": "https://www.youtube.com/watch?v=6K_QhbDCDBg&list=RD6K_QhbDCDBg&start_radio=1",
+        "cover_image": "shopify://shop_images/photo-1596203452346-17a8171b4314.png",
         "description": "",
         "full_width": false,
         "color_scheme": "scheme-1",
