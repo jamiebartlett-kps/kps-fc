@@ -6,6 +6,7 @@
     if (!res.ok) throw new Error('Recipe not found');
 
     const recipe = await res.json();
+    alert(recipe.description);
     document.getElementById("recipe-container").innerHTML = `
       <h1>${recipe.title}</h1>
       <p>${recipe.description}</p>
