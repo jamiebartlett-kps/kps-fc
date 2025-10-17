@@ -53,5 +53,5 @@ function renderRecipe(data) {
         </div>
     `).join('');
 
-    document.getElementById('recipe-wrapper').style.display = block;
+    document.getElementById('recipe-wrapper').style.display = "block";
 }
