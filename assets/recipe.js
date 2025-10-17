@@ -2,7 +2,7 @@
   const slug = window.recipeSlug;
 
   try {
-    const res = await fetch(`/apps/recipes/${slug}`);
+    const res = await fetch(`/apps/recipe/${slug}`);
     if (!res.ok) throw new Error('Recipe not found');
 
     const recipe = await res.json();
