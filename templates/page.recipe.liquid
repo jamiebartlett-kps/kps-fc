@@ -1,3 +1,36 @@
 <div id="recipe-container">Loading recipe...</div>
 
+<header>
+    <div class="container">
+        <h1 id="recipe-title">Homity Pie</h1>
+        <div class="recipe-meta">
+            <div class="meta-item">
+                <span class="meta-label">Serves</span>
+                <span class="meta-value" id="recipe-serves">6</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Cooking Time</span>
+                <span class="meta-value" id="recipe-time">1 hour 15 minutes</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <img id="recipe-image" src="/placeholder.svg" alt="Recipe" class="recipe-image">
+    
+    <div id="recipe-description" class="recipe-description"></div>
+
+    <div class="recipe-content">
+        <aside class="ingredients-section">
+            <h2 class="section-title">Ingredients</h2>
+            <div id="ingredients-list"></div>
+        </aside>
+
+        <section class="instructions-section">
+            <h2 class="section-title">Method</h2>
+            <div id="instructions-list"></div>
+        </section>
+    </div>
+</main>
 <script src="{{ 'recipe.js' | asset_url }}" async></script>
