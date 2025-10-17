@@ -1,0 +1,7 @@
+{% assign slug = request.path | split: '/' | last %}
+<div id="recipe-container">Loading recipe...</div>
+
+<script src="{{ 'recipe.js' | asset_url }}"></script>
+<script>
+  window.recipeSlug = "{{ slug }}";
+</script>
