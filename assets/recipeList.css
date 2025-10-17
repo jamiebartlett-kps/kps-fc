@@ -1,0 +1,169 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #fafaf8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #fff;
+            padding: 2rem 1rem;
+            border-bottom: 1px solid #e8e8e6;
+            margin-bottom: 3rem;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #e8e8e6;
+            background-color: #fff;
+            color: #333;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: #5a9d3d;
+            color: #5a9d3d;
+            background-color: #f5faf2;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+        }
+
+        .recipe-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .recipe-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #e8e8e6;
+        }
+
+        .recipe-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .recipe-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .recipe-description {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .recipe-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            color: #999;
+            border-top: 1px solid #e8e8e6;
+            padding-top: 1rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meta-icon {
+            color: #5a9d3d;
+            font-weight: 600;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: #f5faf2;
+            color: #5a9d3d;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 0.75rem;
+        }
+
+        footer {
+            background-color: #fff;
+            border-top: 1px solid #e8e8e6;
+            padding: 2rem 1rem;
+            text-align: center;
+            color: #999;
+            margin-top: 3rem;
+        }
