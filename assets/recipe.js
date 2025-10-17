@@ -52,4 +52,6 @@ function renderRecipe(data) {
             <p class="step-text">${step}</p>
         </div>
     `).join('');
+
+    document.getElementById('recipe-wrapper').style.display = block;
 }
