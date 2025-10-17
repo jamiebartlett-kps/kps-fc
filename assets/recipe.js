@@ -1,5 +1,6 @@
 (async () => {
-  const slug = window.recipeSlug;
+  const urlParams = new URLSearchParams(window.location.search);
+  const slug = urlParams.get('slug');
 
   try {
     const res = await fetch(`/apps/recipe/${slug}`);
