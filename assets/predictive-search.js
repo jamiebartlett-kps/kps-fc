@@ -177,8 +177,8 @@ class PredictiveSearch extends SearchForm {
     }
 
     fetch(`${routes.predictive_search_url}?q=${encodeURIComponent(searchTerm)}&section_id=predictive-search`, {
-      signal: this.abortController.signal,
-    })
+        signal: this.abortController.signal,
+      })
       .then((response) => {
         if (!response.ok) {
           var error = new Error(response.status);
@@ -197,6 +197,20 @@ class PredictiveSearch extends SearchForm {
           predictiveSearchInstance.cachedResults[queryKey] = resultsMarkup;
         });
         this.renderSearchResults(resultsMarkup);
+
+        fetch(`/apps/recipe/search?q=${encodeURIComponent(searchTerm)}`, {
+          signal: this.abortController.signal,
+        }).then((response) => {
+          if (!response.ok) {
+            var error = new Error(response.status);
+            this.close();
+            throw error;
+          }
+
+          return response.json();
+        }).then((recipes) => {
+          this.renderRecipeResults(recipes);
+        })
       })
       .catch((error) => {
         if (error?.code === 20) {
@@ -206,6 +220,37 @@ class PredictiveSearch extends SearchForm {
         this.close();
         throw error;
       });
+  }
+
+  renderRecipeResults(recipes) {
+    if (recipes.length === 0) return;
+    const resultsContainer = document.getElementById('predictive-search-option-search-keywords');
+    resultsContainer.insertAdjacentHTML('beforebegin', `
+    <div id="predictive-search-results-groups-wrapper" class="predictive-search__results-groups-wrapper predictive-search__results-groups-wrapper--no-products predictive-search__results-groups-wrapper--no-suggestions">
+      <div class="predictive-search__result-group">
+        <div class="predictive-search__pages-wrapper">
+          <h2 id="predictive-search-pages-desktop" class="predictive-search__heading text-body caption-with-letter-spacing">Recipes</h2>
+          ${recipes.map(recipe => `
+            <ul id="predictive-search-results-queries-list" class="predictive-search__results-list list-unstyled" role="group" aria-labelledby="predictive-search-queries"><li id="predictive-search-option-collection-1" class="predictive-search__list-item" role="option" aria-selected="false">
+              <a href="/pages/recipe?slug=${recipe.slug}" class="predictive-search__item link link--text" tabindex="-1">
+                <div class="predictive-search__item-content predictive-search__item-content--centered predictive-search__recipe-item">
+                  <img src="${recipe.imageUrl}" alt="${recipe.title}" class="predictive-search__item-image"/>
+                  <div style="display: flex; flex-direction: column; gap: 4px;">
+                  <p class="predictive-search__item-heading h5">${recipe.title}</p>
+                    <div style="display: flex; flex-direction: row; gap: 4px;">
+                      <p class="predictive-search__item-vendor">Serves ${recipe.serves}</p>
+                      <p class="predictive-search__item-vendor">•</p>
+                      <p class="predictive-search__item-vendor">${recipe.cookingTime}</p>
+                    </div>
+                  
+                  </div>
+                </div>
+              </a>
+            </li></ul>
+          `).join('')}
+        </div>
+      </div>
+    </div>`);
   }
 
   setLiveRegionLoadingState() {

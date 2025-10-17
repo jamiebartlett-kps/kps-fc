@@ -161,6 +161,19 @@ predictive-search[loading] .predictive-search__results-groups-wrapper ~ .predict
   flex-direction: column;
 }
 
+.predictive-search__recipe-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.predictive-search__item-image {
+width: 36px;
+  height: 36px;
+  margin-right: 12px;
+  border-radius: 4px;
+}
+
 .predictive-search__item-content--centered {
   justify-content: center;
 }
