@@ -15,7 +15,7 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Skate Fashion",
+            "heading": "Hello World",
             "heading_size": "h0"
           }
         },
@@ -44,7 +44,6 @@
         "button"
       ],
       "settings": {
-        "image": "shopify://shop_images/photo-1692977121343-71e195b7cda9.png",
         "image_overlay_opacity": 40,
         "image_height": "medium",
         "image_behavior": "none",
@@ -103,7 +102,6 @@
         "heading_size": "h1",
         "enable_video_looping": false,
         "video_url": "https://www.youtube.com/watch?v=6K_QhbDCDBg&list=RD6K_QhbDCDBg&start_radio=1",
-        "cover_image": "shopify://shop_images/photo-1596203452346-17a8171b4314.png",
         "description": "",
         "full_width": false,
         "color_scheme": "scheme-1",
