@@ -109,10 +109,15 @@
         "content": "t:settings_schema.typography.settings.header__1.content"
       },
       {
-        "type": "font_picker",
+        "type": "select",
         "id": "type_header_font",
-        "default": "assistant_n4",
-        "label": "t:settings_schema.typography.settings.type_header_font.label"
+        "label": "t:settings_schema.typography.settings.type_header_font.label",
+        "default": "Riverford",
+        "options": [
+          { "value": "Riverford", "label": "Riverford" },
+          { "value": "system-ui", "label": "System Default" },
+          { "value": "sans-serif", "label": "Sans Serif" }
+        ]
       },
       {
         "type": "range",
@@ -129,10 +134,15 @@
         "content": "t:settings_schema.typography.settings.header__2.content"
       },
       {
-        "type": "font_picker",
+        "type": "select",
         "id": "type_body_font",
-        "default": "assistant_n4",
-        "label": "t:settings_schema.typography.settings.type_body_font.label"
+        "default": "Work sans",
+        "label": "t:settings_schema.typography.settings.type_body_font.label",
+        "options": [
+          { "value": "Work sans", "label": "Work sans" },
+          { "value": "system-ui", "label": "System Default" },
+          { "value": "sans-serif", "label": "Sans Serif" }
+        ]
       },
       {
         "type": "range",
