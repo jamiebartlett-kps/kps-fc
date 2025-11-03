@@ -62,8 +62,13 @@
         {%- if gift_card_recipient_feature_active -%}
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
         {%- endif -%}
-
+        
         <div class="product-form__buttons">
+          <modal-opener data-modal="#SlotFinder">
+            <button id="SlotFinderButton-{{ section_id }}" class="mb-4 slot-finder-button button button--secondary button--full-width" type="button">
+              Find a Slot
+            </button>
+          </modal-opener>
           {%- liquid
             assign check_against_inventory = true
             if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'

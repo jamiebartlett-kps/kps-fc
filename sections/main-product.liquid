@@ -9,6 +9,9 @@
     data-zoom-on-hover
   {% endif %}
 >
+   <modal-dialog class="slot-finder-modal" id="SlotFinder">
+    {%- render 'slot-finder' -%}
+  </modal-dialog>
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}

@@ -1,0 +1,273 @@
+<style>
+  .slot-finder-modal__content h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+
+  .slot-finder-modal__content .subtitle {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+
+  .slot-finder-modal__content form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .slot-finder-modal__content label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .slot-finder-modal__content input[type='text'] {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+  }
+
+  .slot-finder-modal__content input[type='text']:focus {
+    outline: none;
+    border-color: #333;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .slot-finder-modal__content input[type='text']::placeholder {
+    color: #999;
+  }
+
+  .slot-finder-modal__content #slot-results {
+    margin-top: 40px;
+  }
+
+  .slot-finder-modal__content .results-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+  }
+
+  .slot-finder-modal__content .slots-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .slot-finder-modal__content .slots-table thead {
+    background: #f3f4f6;
+    border-bottom: 2px solid #d1d5db;
+  }
+
+  .slot-finder-modal__content .slots-table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .slot-finder-modal__content .slots-table td {
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #1a1a1a;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .slot-finder-modal__content .slots-table tbody tr:hover {
+    background: #fafafa;
+  }
+
+  .slot-finder-modal__content .slots-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .slot-finder-modal__content .select-button {
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background: white;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .slot-finder-modal__content .select-button:hover {
+    background: #1a1a1a;
+    color: white;
+  }
+
+  .slot-finder-modal__content .select-button:active {
+    transform: scale(0.98);
+  }
+
+  .slot-finder-modal__content .select-button:disabled {
+    background: #f3f4f6;
+    color: #999;
+    cursor: not-allowed;
+    border-color: #d1d5db;
+  }
+
+  .slot-finder-modal__content .empty-state,
+  .slot-finder-modal__content .error-state {
+    text-align: center;
+    padding: 32px 20px;
+    color: #666;
+    font-size: 16px;
+  }
+
+  .slot-finder-modal__content .loading {
+    text-align: center;
+    padding: 24px;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 600px) {
+    .slot-finder-modal__content h1 {
+      font-size: 24px;
+    }
+
+    .slot-finder-modal__content input[type='text'],
+    .slot-finder-modal__content button {
+      font-size: 16px;
+      padding: 12px 14px;
+    }
+
+    .slot-finder-modal__content .slots-table {
+      font-size: 12px;
+    }
+
+    .slot-finder-modal__content .slots-table th,
+    .slot-finder-modal__content .slots-table td {
+      padding: 10px 12px;
+    }
+
+    .slot-finder-modal__content .select-button {
+      padding: 6px 12px;
+      font-size: 11px;
+    }
+  }
+</style>
+
+<div class="slot-finder-modal__content">
+  <h1>Find Slots</h1>
+  <p class="subtitle">Enter your postcode to discover available booking slots</p>
+
+  <form id="postcode-form">
+    <div>
+      <label htmlFor="postcode-input">Postcode</label>
+      <input type="text" id="postcode-input" name="postcode" placeholder="e.g., SW1A 1AA" required>
+    </div>
+    <button type="submit" class="button button--secondary button--full-width">Search Slots</button>
+  </form>
+
+  <div id="slot-results"></div>
+    <button id="slot-finder-close-x" style="position:absolute; top:10px; right:10px; font-size:1.5em; background:none; border:none; cursor:pointer;">&times;</button>
+    <button id="slot-finder-close-btn" class="button button--secondary button--full-width" style="margin-top:1em;">Close</button>
+  </div>
+
+<script type="text/javascript">
+  document.getElementById('postcode-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    function closeModal() {
+      document.getElementById('SlotFinder').removeAttribute("open");
+    }
+  
+    document.getElementById('slot-finder-close-x').addEventListener('click', closeModal);
+    document.getElementById('slot-finder-close-btn').addEventListener('click', closeModal);
+
+    const postcode = document.getElementById('postcode-input').value.trim();
+    const resultsDiv = document.getElementById('slot-results');
+    resultsDiv.innerHTML = '<div class="loading">Loading slots...</div>';
+
+    try {
+      const response = await fetch(`/apps/slot/slotFinder?postcode=${encodeURIComponent(postcode)}`);
+      if (!response.ok) throw new Error('Network response was not ok');
+      const data = await response.json();
+
+      if (!Array.isArray(data) || data.length === 0) {
+        resultsDiv.innerHTML = '<div class="empty-state">No slots found for this postcode.</div>';
+        return;
+      }
+
+      let tableHTML = `<div class="results-title">Available Slots (${data.length})</div>
+          <table class="slots-table">
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th>Time</th>
+                <th>Partner</th>
+                <th>Contact</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>`;
+
+      tableHTML += data
+        .map(
+          (slot, idx) => `
+          <tr>
+            <td>${slot.day}</td>
+            <td>${slot.timeWindow}</td>
+            <td>${slot.partner?.name || 'N/A'}</td>
+            <td>${slot.partner?.contactEmail || 'N/A'}</td>
+            <td><button type="button" class="select-button" data-slot-id="${slot.id}">Select</button></td>
+          </tr>
+        `
+        )
+        .join('');
+
+      tableHTML += `</tbody></table>`;
+      resultsDiv.innerHTML = tableHTML;
+
+      resultsDiv.querySelectorAll('.select-button').forEach((btn) => {
+        btn.addEventListener('click', function () {
+          const slotId = this.getAttribute('data-slot-id');
+          console.log('[v0] Selected slot:', data[slotId]);
+        });
+      });
+
+      resultsDiv.querySelectorAll('.select-button').forEach((btn) => {
+        btn.addEventListener('click', async function () {
+          const slotId = this.getAttribute('data-slot-id');
+          try {
+            await fetch('/cart/update.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ attributes: { delivery_slot_id: slotId } }),
+            });
+            closeModal();
+          } catch (err) {
+            alert('Failed to add slot to cart.');
+          }
+        });
+      });
+    } catch (err) {
+      resultsDiv.innerHTML = '<div class="error-state">Error fetching slots. Please try again.</div>';
+    }
+  });
+</script>
