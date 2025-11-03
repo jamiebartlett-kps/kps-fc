@@ -9,6 +9,66 @@
  */
 {
   "sections": {
+    "hero_image_banner_YHLLXG": {
+      "type": "hero-image-banner",
+      "blocks": {
+        "heading_b8bPXE": {
+          "type": "heading",
+          "settings": {
+            "heading": "Fresh fruit & veg at its seasonal best",
+            "heading_size": "hxxl"
+          }
+        },
+        "text_aV73kz": {
+          "type": "text",
+          "settings": {
+            "text": "Always free delivery.",
+            "text_style": "h2"
+          }
+        },
+        "text_pijy6M": {
+          "type": "text",
+          "settings": {
+            "text": "Always free delivery.",
+            "text_style": "h2"
+          }
+        },
+        "buttons_m7Q33Q": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Get started",
+            "button_link_1": "shopify://collections",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_b8bPXE",
+        "text_aV73kz",
+        "text_pijy6M",
+        "buttons_m7Q33Q"
+      ],
+      "name": "t:sections.hero-image-banner.presets.name",
+      "settings": {
+        "image_desktop_xl": "shopify://shop_images/anon-home-xmas-2025-hero-large-screens.jpg",
+        "image_desktop": "shopify://shop_images/anon-home-xmas-2025-hero-1920.jpg",
+        "image_mobile_xl": "shopify://shop_images/anon-home-xmas-2025-hero-950.jpg",
+        "image_mobile": "shopify://shop_images/anon-home-xmas-2025-hero-700.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "image_behavior": "none",
+        "desktop_content_position": "top-left",
+        "desktop_content_alignment": "left",
+        "show_text_box": true,
+        "color_scheme": "scheme-7",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -164,6 +224,7 @@
     }
   },
   "order": [
+    "hero_image_banner_YHLLXG",
     "image_banner",
     "collage",
     "video",
