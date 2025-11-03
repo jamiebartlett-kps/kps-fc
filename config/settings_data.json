@@ -9,11 +9,11 @@
  */
 {
   "current": {
-    "logo": "shopify://shop_images/Bifrost-DfjS3bCd.png",
-    "logo_width": 50,
-    "type_header_font": "sans_serif_n4",
+    "logo": "shopify://shop_images/riverford-logo-black.svg",
+    "logo_width": 190,
+    "type_header_font": "Riverford",
     "heading_scale": 100,
-    "type_body_font": "sans_serif_n4",
+    "type_body_font": "Work sans",
     "body_scale": 100,
     "page_width": 1200,
     "spacing_sections": 0,
@@ -43,7 +43,7 @@
     "card_style": "standard",
     "card_image_padding": 0,
     "card_text_alignment": "left",
-    "card_color_scheme": "scheme-2",
+    "card_color_scheme": "scheme-1",
     "card_border_thickness": 0,
     "card_border_opacity": 10,
     "card_corner_radius": 0,
@@ -136,17 +136,10 @@
       }
     },
     "content_for_index": [],
-    "blocks": {
-      "11735689235857492391": {
-        "type": "shopify://apps/algolia-ai-search-discovery/blocks/autocomplete/57bb7f86-d5fe-4d43-96ca-3953324494cf",
-        "disabled": false,
-        "settings": {}
-      }
-    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "background": "#ffffff",
+          "background": "#f8f6f1",
           "background_gradient": "",
           "text": "#121212",
           "button": "#121212",
@@ -199,6 +192,28 @@
           "shadow": "#121212"
         }
       },
+      "scheme-6": {
+        "settings": {
+          "background": "#f8f6f1",
+          "background_gradient": "",
+          "text": "#121212",
+          "button": "#121212",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#121212",
+          "shadow": "#121212"
+        }
+      },
+      "scheme-7": {
+        "settings": {
+          "background": "#D32066",
+          "background_gradient": "",
+          "text": "#ffffff",
+          "button": "#ffffff",
+          "button_label": "#000000",
+          "secondary_button_label": "#000000",
+          "shadow": "#000000"
+        }
+      },
       "scheme-aae4f118-f077-4959-acbd-493da178dae6": {
         "settings": {
           "background": "{{ shop.brand.colors.primary[0].background }}",
@@ -218,7 +233,7 @@
       "color_schemes": {
         "scheme-1": {
           "settings": {
-            "background": "#FFFFFF",
+            "background": "#f8f6f1",
             "background_gradient": "",
             "text": "#121212",
             "button": "#121212",
@@ -282,11 +297,11 @@
       "spacing_grid_vertical": 8,
       "buttons_border_thickness": 1,
       "buttons_border_opacity": 100,
-      "buttons_radius": 0,
-      "buttons_shadow_opacity": 0,
-      "buttons_shadow_horizontal_offset": 0,
+      "buttons_radius": 2,
+      "buttons_shadow_opacity": 25,
+      "buttons_shadow_horizontal_offset": 4,
       "buttons_shadow_vertical_offset": 4,
-      "buttons_shadow_blur": 5,
+      "buttons_shadow_blur": 0,
       "variant_pills_border_thickness": 1,
       "variant_pills_border_opacity": 55,
       "variant_pills_radius": 40,
