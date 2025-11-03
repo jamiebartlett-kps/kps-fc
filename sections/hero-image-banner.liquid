@@ -65,8 +65,28 @@
     max-width: none;
   }
 
+  .banner--content-align-left .hero-banner__box {
+    text-align: center;
+  }
+
+  @media only screen and (min-width: 960px) {
+    .banner--content-align-right .hero-banner__box {
+      text-align: right;
+    }
+
+    .banner--content-align-left .hero-banner__box {
+      text-align: left;
+    }
+
+    .banner--content-align-left.banner--desktop-transparent .hero-banner__box,
+    .banner--content-align-right.banner--desktop-transparent .hero-banner__box,
+    .banner--medium.banner--desktop-transparent .hero-banner__box {
+      max-width: 68rem;
+    }
+  }
+
   @media screen and (max-width: 959px) {
-    .banner__box div {
+    .hero-banner__heading-container, .hero-banner__text-container {
       width: 100%;
       padding: 4rem 4rem 0 4rem;
       margin: 0;
@@ -129,25 +149,7 @@
     }
   }
 
-  .banner--content-align-left .hero-banner__box {
-    text-align: center;
-  }
-
-  @media only screen and (min-width: 960px) {
-    .banner--content-align-right .hero-banner__box {
-      text-align: right;
-    }
-
-    .banner--content-align-left .hero-banner__box {
-      text-align: left;
-    }
-
-    .banner--content-align-left.banner--desktop-transparent .hero-banner__box,
-    .banner--content-align-right.banner--desktop-transparent .hero-banner__box,
-    .banner--medium.banner--desktop-transparent .hero-banner__box {
-      max-width: 68rem;
-    }
-  }
+  .hero-banner__content.banner__content { align-items: flex-start;}
 
   .hero-banner__media {
     position: absolute;
@@ -309,9 +311,9 @@
 
 
 
-  <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+  <div class="hero-banner__content banner__content banner__content--{{ section.settings.desktop_content_position }} page-width">
     <div class="hero-banner__box banner__box content-container content-container--full-width-mobile">
-      <div class="banner__heading-container">
+      <div class="hero-banner__heading-container">
         {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'heading' -%}
