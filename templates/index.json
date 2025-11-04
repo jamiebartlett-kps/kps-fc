@@ -33,9 +33,20 @@
             "text_style": "h2"
           }
         },
+        "image_text_group_gW9HYy": {
+          "type": "image_text_group",
+          "settings": {
+            "image_1": "shopify://shop_images/trustpilot-logo-white.svg",
+            "image_1_width": 30,
+            "image_2": "shopify://shop_images/trustpilot-5-stars.svg",
+            "image_2_width": 30,
+            "text": "<p>Trustscore <strong>4.8</strong> out of <strong>19476  reviews</strong></p>"
+          }
+        },
         "buttons_m7Q33Q": {
           "type": "buttons",
           "settings": {
+            "fix_to_bottom_mobile": true,
             "button_label_1": "Get started",
             "button_link_1": "shopify://collections",
             "button_style_secondary_1": false,
@@ -49,6 +60,7 @@
         "heading_b8bPXE",
         "text_aV73kz",
         "text_pijy6M",
+        "image_text_group_gW9HYy",
         "buttons_m7Q33Q"
       ],
       "name": "t:sections.hero-image-banner.presets.name",
