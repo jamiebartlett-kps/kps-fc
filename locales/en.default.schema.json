@@ -1253,6 +1253,9 @@
         "stack_images_on_mobile": {
           "label": "Stack images"
         },
+        "fix_to_bottom_mobile": {
+          "label": "Fix to bottom"
+        },
         "show_text_below": {
           "label": "Container"
         }
@@ -1418,6 +1421,9 @@
         },
         "stack_images_on_mobile": {
           "label": "Stack images"
+        },
+        "fix_to_bottom_mobile": {
+          "label": "Fix to bottom"
         },
         "show_text_below": {
           "label": "Container"

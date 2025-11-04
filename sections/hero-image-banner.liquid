@@ -65,11 +65,11 @@
     max-width: none;
   }
 
-  .banner--content-align-left .hero-banner__box {
+  .banner--content-align-left .hero-banner__box.banner__box {
     text-align: center;
   }
 
-  @media only screen and (min-width: 960px) {
+  @media only screen and (min-width: 961px) {
     .banner--content-align-right .hero-banner__box {
       text-align: right;
     }
@@ -85,7 +85,7 @@
     }
   }
 
-  @media screen and (max-width: 959px) {
+  @media screen and (max-width: 960px) {
     .hero-banner__heading-container, .hero-banner__text-container {
       width: 100%;
       padding: 4rem 4rem 0 4rem;
@@ -93,7 +93,7 @@
     }
   }
 
-  @media screen and (min-width: 960px) {
+  @media screen and (min-width: 961px) {
     .banner__box.content-container.content-container--full-width-mobile {
       max-width: 71rem;
     }
@@ -114,7 +114,7 @@
     margin: 0;
   }
 
-  @media screen and (min-width: 960px) {
+  @media screen and (min-width: 961px) {
     .banner--content-align-right .banner__box {
       text-align: right!important;
     }
@@ -132,20 +132,31 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 75vh;
+    display: flex;
+    justify-content: center;
+
+    aspect-ratio: auto 412 / 915;
+    max-height: 700px;
+  }
+
+  @media screen and (max-width: 750px) {
+      .hero-banner {
+      z-index: 1!important;
+    }
   }
 
   @media screen and (min-width: 750px) and (max-width: 960px) {
     .hero-banner {
       height: 95vh;
+      max-height: 1080px;
     }
   }
 
-  @media screen and (min-width: 960px) {
+  @media screen and (min-width: 961px) {
     .hero-banner {
       min-height: auto!important;
-      height: auto;
-      aspect-ratio: auto 1920 / 906;
+      aspect-ratio: auto 961 / 721;
+      max-height: 906px;
     }
   }
 
@@ -157,6 +168,13 @@
     height: 100%;
   }
 
+  @media screen and (min-width: 961px) {
+    .hero-banner__media {
+      aspect-ratio: auto 1920 / 906;
+      max-width: 1920px
+    }
+  }
+
   .hero-banner__image {
     width: 100%;
     height: auto;
@@ -165,12 +183,12 @@
     bottom: 0;
     left: 0;
   }
-  @media screen and (min-width: 960px) {
+  /* @media screen and (min-width: 960px) {
     .hero-banner__image {
       top: 0;
       bottom: auto;
     }
-  }
+  } */
 
   .hero-banner__heading {
     margin: 0;
@@ -187,11 +205,65 @@
     width: 100%;
   }
 
+  @media screen and (min-width: 961px) {
+    .hero-banner__text-container {
+      width: 80%;
+    }
+  }
+
+  .hero-banner__inset-container {
+    color: rgb(var(--color-foreground));
+    margin: 20px 0 20px 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    .hero-banner__inset-container {
+      margin: 50px 0 0 0;
+    }
+  }
+
+  @media screen and (min-width: 961px) {
+    .hero-banner__inset-container {
+      margin: 50px 0 20px 0;
+    }
+  }
+
+  .hero-banner__images-wrapper {
+    display: flex;
+    align-items: baseline;
+    gap: 3rem;
+    justify-content: center;
+  }
+
+  @media screen and (min-width: 961px) {
+    .hero-banner__images-wrapper {
+      justify-content: flex-start;
+    }
+  }
+
+  .hero-banner__inline-image {
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
+
+  .hero-banner__inline-image img {
+    width: 100%;
+  }
+
+
   @media screen and (max-width: 750px) {
     .banner--content-align-mobile-center .hero-banner__buttons {
       display: flex;
       gap: 1rem;
       justify-content: center
+    }
+    .hero-banner__buttons--fixed-bottom {
+      position: fixed;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      background-color: rgb(var(--color-background));
+      padding: 20px 10px;
     }
   }
 
@@ -257,7 +329,7 @@
       {%- if section.settings.image_desktop != blank -%}
         <!-- Desktop image (961px–1919px) -->
         <source
-          media="(min-width: 960px) and (max-width: 1919px)"
+          media="(min-width: 961px) and (max-width: 1919px)"
           srcset="
             {{ section.settings.image_desktop | image_url: width: 960 }} 960w,
             {{ section.settings.image_desktop | image_url: width: 1500 }} 1500w,
@@ -334,9 +406,41 @@
             <h2 class="banner__text rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
               {{ block.settings.text }}
             </h2>
+
+          {%- when 'image_text_group' -%}
+          <div class="hero-banner__inset-container" {{ block.shopify_attributes }}>
+            <div class="hero-banner__images-wrapper">
+              {%- if block.settings.image_1 != blank -%}
+                <div class="hero-banner__inline-image" style="width: {{ block.settings.image_1_width }}%;">
+                  <img
+                    src="{{ block.settings.image_1 | image_url: width: 800 }}"
+                    alt="{{ block.settings.image_1.alt | escape }}"
+                    loading="lazy"
+                  >
+                </div>
+              {%- endif -%}
+              
+              {%- if block.settings.image_2 != blank -%}
+                <div class="hero-banner__inline-image" style="width: {{ block.settings.image_2_width }}%;">
+                  <img
+                    src="{{ block.settings.image_2 | image_url: width: 800 }}"
+                    alt="{{ block.settings.image_2.alt | escape }}"
+                    loading="lazy"
+                  >
+                </div>
+              {%- endif -%}
+            </div>
+
+            {%- if block.settings.text != blank -%}
+              <div class="hero-banner__inset-text">
+                {{ block.settings.text }}
+              </div>
+            {%- endif -%}
+          </div>
+
           {%- when 'buttons' -%}
             <div
-              class="hero-banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %}"
+              class="hero-banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %} {% if block.settings.fix_to_bottom_mobile %} hero-banner__buttons--fixed-bottom{%- endif -%}"
               {{ block.shopify_attributes }}
             >
               {%- if block.settings.button_label_1 != blank -%}
@@ -671,10 +775,59 @@
       ]
     },
     {
+      "type": "image_text_group",
+      "name": "Image and Text Group",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "First Image"
+        },
+        {
+          "type": "range",
+          "id": "image_1_width",
+          "min": 10,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "label": "First Image Width",
+          "default": 50
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Second Image"
+        },
+        {
+          "type": "range",
+          "id": "image_2_width",
+          "min": 10,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "label": "Second Image Width",
+          "default": 50
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text content",
+          "default": "<p>Add your text here</p>"
+        }
+      ]
+    },
+    {
       "type": "buttons",
       "name": "t:sections.hero-image-banner.blocks.buttons.name",
       "limit": 1,
       "settings": [
+        {
+          "type": "checkbox",
+          "id": "fix_to_bottom_mobile",
+          "default": true,
+          "label": "t:sections.hero-image-banner.settings.fix_to_bottom_mobile.label"
+        },
         {
         "type": "header",
         "content": "t:sections.hero-image-banner.blocks.buttons.settings.header_1.content"
