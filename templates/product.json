@@ -41,7 +41,7 @@
             "background_color": "#ccd9c3",
             "vertical_padding": 20,
             "avatar_image": "{{ closest.product.metafields.custom.grower.value.avatar.value }}",
-            "avatar_size": 60,
+            "avatar_size": 80,
             "avatar_background": "#ffffff",
             "avatar_text_gap": 15,
             "text_line_1": "{{ closest.product.title }}",
