@@ -1,6 +1,257 @@
+{% doc %}
+  @prompt
+    A quotes section, like multicolumn but with 2 big quotes. and names under each one
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-quotes-section-{{ ai_gen_id }} {
+    padding: 60px 20px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-quotes-container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ai-quotes-heading-{{ ai_gen_id }} {
+    text-align: center;
+    margin: 0 0 50px;
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-quotes-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .ai-quote-item-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
+    background-color: {{ block.settings.quote_background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-quote-icon-{{ ai_gen_id }} {
+    width: {{ block.settings.quote_icon_size }}px;
+    height: {{ block.settings.quote_icon_size }}px;
+    color: {{ block.settings.quote_icon_color }};
+    flex-shrink: 0;
+  }
+
+  .ai-quote-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.quote_text_size }}px;
+    line-height: 1.6;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+  }
+
+  .ai-quote-author-{{ ai_gen_id }} {
+    font-size: {{ block.settings.author_text_size }}px;
+    color: {{ block.settings.author_text_color }};
+    font-weight: 600;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-quotes-section-{{ ai_gen_id }} {
+      padding: 40px 20px;
+    }
+
+    .ai-quotes-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .ai-quote-item-{{ ai_gen_id }} {
+      padding: 30px 20px;
+    }
+
+    .ai-quotes-heading-{{ ai_gen_id }} {
+      margin-bottom: 30px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-quotes-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-quotes-container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-quotes-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="ai-quotes-grid-{{ ai_gen_id }}">
+      <div class="ai-quote-item-{{ ai_gen_id }}">
+        <svg class="ai-quote-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+        </svg>
+        {% if block.settings.quote_1 != blank %}
+          <div class="ai-quote-text-{{ ai_gen_id }}">{{ block.settings.quote_1 }}</div>
+        {% else %}
+          <div class="ai-quote-text-{{ ai_gen_id }}">Share a customer testimonial or highlight a positive review to build trust and credibility.</div>
+        {% endif %}
+        {% if block.settings.author_1 != blank %}
+          <p class="ai-quote-author-{{ ai_gen_id }}">{{ block.settings.author_1 }}</p>
+        {% else %}
+          <p class="ai-quote-author-{{ ai_gen_id }}">Customer name</p>
+        {% endif %}
+      </div>
+
+      <div class="ai-quote-item-{{ ai_gen_id }}">
+        <svg class="ai-quote-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+        </svg>
+        {% if block.settings.quote_2 != blank %}
+          <div class="ai-quote-text-{{ ai_gen_id }}">{{ block.settings.quote_2 }}</div>
+        {% else %}
+          <div class="ai-quote-text-{{ ai_gen_id }}">Share a customer testimonial or highlight a positive review to build trust and credibility.</div>
+        {% endif %}
+        {% if block.settings.author_2 != blank %}
+          <p class="ai-quote-author-{{ ai_gen_id }}">{{ block.settings.author_2 }}</p>
+        {% else %}
+          <p class="ai-quote-author-{{ ai_gen_id }}">Customer name</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Quotes",
+  "tag": null,
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What our customers say"
+    },
+    {
+      "type": "header",
+      "content": "Quote 1"
+    },
+    {
+      "type": "richtext",
+      "id": "quote_1",
+      "label": "Quote text",
+      "default": "<p>Share a customer testimonial or highlight a positive review to build trust and credibility.</p>"
+    },
+    {
+      "type": "text",
+      "id": "author_1",
+      "label": "Author name",
+      "default": "Customer name"
+    },
+    {
+      "type": "header",
+      "content": "Quote 2"
+    },
+    {
+      "type": "richtext",
+      "id": "quote_2",
+      "label": "Quote text",
+      "default": "<p>Share a customer testimonial or highlight a positive review to build trust and credibility.</p>"
+    },
+    {
+      "type": "text",
+      "id": "author_2",
+      "label": "Author name",
+      "default": "Customer name"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f3f3f3"
+    },
+    {
+      "type": "color",
+      "id": "quote_background_color",
+      "label": "Quote background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "author_text_color",
+      "label": "Author text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "quote_icon_color",
+      "label": "Quote icon",
+      "default": "#334fb4"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "quote_text_size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Quote text size",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "author_text_size",
+      "min": 12,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Author text size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "quote_icon_size",
+      "min": 20,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Quote icon size",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quotes"
+    }
+  ]
+}
 {% endschema %}
