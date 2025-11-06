@@ -137,6 +137,93 @@
         "padding_bottom": 36
       }
     },
+    "multicolumn_ytQfMV": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_m3a87W": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/how-riverford-works-icon-1.png",
+            "title": "Choose a weekly box of goodness",
+            "text": "<p>We offer a variety of set boxes to suit your needs, harvested from our <br/>own fields and grower friends. Each box is carefully picked and packed <br/>by us every week.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_Kph3an": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/how-riverford-works-icon-2.png",
+            "title": "Add farm-fresh essentials",
+            "text": "<p>You can also add other farm-fresh produce to your order. From fridge <br/>fillers to store cupboard essentials, we have everything you need to <br/>keep stocked up.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_FWVXEi": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/how-riverford-works-icon-3.png",
+            "title": "Free delivery to your door",
+            "text": "<p>Get weekly deliveries on a set day for your area. Manage orders easily <br/>with our app, receive push notifications and live delivery updates.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_m3a87W",
+        "column_Kph3an",
+        "column_FWVXEi"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "How Riverford Works",
+        "heading_size": "h0",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "176243963489943f8f": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_7a28a71_keUEmV": {
+          "type": "ai_gen_block_7a28a71",
+          "settings": {
+            "heading": "Hear from our customers",
+            "quote_1": "<p>The boxes have a much greater range than many supermarkets. The boxes also encourage us to <strong>try varieties</strong> we have not previously encountered.</p>",
+            "author_1": "WILL, ALDRIDGE",
+            "quote_2": "<p>The convenience of having fresh organic fruit & veg delivered to my door each week is essential to my <strong>family eating well.</strong></p>",
+            "author_2": "ANGELLIQUE, LONDON",
+            "background_color": "#d32066",
+            "quote_background_color": "#d32066",
+            "text_color": "#ffffff",
+            "author_text_color": "#ffffff",
+            "quote_icon_color": "#ffffff",
+            "heading_size": 32,
+            "quote_text_size": 20,
+            "author_text_size": 16,
+            "quote_icon_size": 40,
+            "border_radius": 8
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_7a28a71_keUEmV"
+      ],
+      "settings": {}
+    },
     "collage": {
       "type": "collage",
       "blocks": {
@@ -194,6 +281,8 @@
   "order": [
     "hero_image_banner_YHLLXG",
     "multicolumn",
+    "multicolumn_ytQfMV",
+    "176243963489943f8f",
     "collage",
     "video"
   ]
