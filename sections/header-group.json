@@ -31,7 +31,7 @@
         "menu": "main-menu",
         "menu_type_desktop": "mega",
         "sticky_header_type": "none",
-        "show_line_separator": true,
+        "show_line_separator": false,
         "color_scheme": "scheme-6",
         "menu_color_scheme": "scheme-d8ca545b-2130-4b4d-a162-fc05027874ee",
         "enable_country_selector": true,
