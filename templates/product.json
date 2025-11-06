@@ -48,7 +48,7 @@
             "text_line_1_size": 16,
             "text_line_1_weight": "600",
             "text_line_1_color": "#000000",
-            "text_line_2": "Grown by {{ closest.product.metafields.custom.grower.value.name.value }} {{ closest.product.metafields.custom.grower.value.location.value }}",
+            "text_line_2": "{{ closest.product.metafields.custom.grow_verb.value }} by {{ closest.product.metafields.custom.grower.value.name.value }} {{ closest.product.metafields.custom.grower.value.location.value }}",
             "text_line_2_size": 14,
             "text_line_2_weight": "400",
             "text_line_2_color": "#666666",
