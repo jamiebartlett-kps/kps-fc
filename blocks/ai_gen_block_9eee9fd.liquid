@@ -70,7 +70,7 @@
   }
 
   .ai-product-banner__title-{{ ai_gen_id }} {
-    font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
+    {% comment %} font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }}; {% endcomment %}
     font-weight: {{ block.settings.heading_font.weight }};
     font-style: {{ block.settings.heading_font.style }};
     font-size: {{ block.settings.heading_size }}px;
@@ -80,7 +80,7 @@
   }
 
   .ai-product-banner__description-{{ ai_gen_id }} {
-    font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
+    {% comment %} font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }}; {% endcomment %}
     font-weight: {{ block.settings.heading_font.weight }};
     font-style: {{ block.settings.heading_font.style }};
     font-size: {{ block.settings.description_size }}px;
@@ -101,7 +101,7 @@
 
     .ai-product-banner__title-{{ ai_gen_id }} {
       font-size: {{ block.settings.heading_size | times: 0.7 }}px;
-      ai-product-banner__title-{{ ai_gen_id }}
+      
     }
 
     .ai-product-banner__description-{{ ai_gen_id }} {
