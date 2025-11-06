@@ -1,6 +1,390 @@
+{% doc %}
+  @prompt
+    This should be a full width horizontal bar with a customisable background colour, on the left it should have an avatar with two lines of text next to it. On the right it should show the price.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-info-bar-{{ ai_gen_id }} {
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.vertical_padding }}px 0;
+  }
+
+  .ai-info-bar-container-{{ ai_gen_id }} {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .ai-info-bar-left-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: {{ block.settings.avatar_text_gap }}px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ai-info-bar-avatar-{{ ai_gen_id }} {
+    width: {{ block.settings.avatar_size }}px;
+    height: {{ block.settings.avatar_size }}px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    overflow: hidden;
+    background-color: {{ block.settings.avatar_background }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-info-bar-avatar-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-info-bar-avatar-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-info-bar-avatar-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-info-bar-text-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.text_line_gap }}px;
+    min-width: 0;
+  }
+
+  .ai-info-bar-text-line-1-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_line_1_size }}px;
+    font-weight: {{ block.settings.text_line_1_weight }};
+    color: {{ block.settings.text_line_1_color }};
+    margin: 0;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ai-info-bar-text-line-2-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_line_2_size }}px;
+    font-weight: {{ block.settings.text_line_2_weight }};
+    color: {{ block.settings.text_line_2_color }};
+    margin: 0;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ai-info-bar-right-{{ ai_gen_id }} {
+    flex-shrink: 0;
+  }
+
+  .ai-info-bar-price-{{ ai_gen_id }} {
+    font-size: {{ block.settings.price_size }}px;
+    font-weight: {{ block.settings.price_weight }};
+    color: {{ block.settings.price_color }};
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-info-bar-container-{{ ai_gen_id }} {
+      gap: 15px;
+    }
+
+    .ai-info-bar-avatar-{{ ai_gen_id }} {
+      width: {{ block.settings.avatar_size | times: 0.8 }}px;
+      height: {{ block.settings.avatar_size | times: 0.8 }}px;
+    }
+
+    .ai-info-bar-text-line-1-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_line_1_size | times: 0.9 }}px;
+    }
+
+    .ai-info-bar-text-line-2-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_line_2_size | times: 0.9 }}px;
+    }
+
+    .ai-info-bar-price-{{ ai_gen_id }} {
+      font-size: {{ block.settings.price_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-info-bar-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-info-bar-container-{{ ai_gen_id }}">
+    <div class="ai-info-bar-left-{{ ai_gen_id }}">
+      <div class="ai-info-bar-avatar-{{ ai_gen_id }}">
+        {% if block.settings.avatar_image %}
+          <img
+            src="{{ block.settings.avatar_image | image_url: width: 200 }}"
+            alt="{{ block.settings.avatar_image.alt | escape }}"
+            loading="lazy"
+            width="200"
+            height="200"
+          >
+        {% else %}
+          <div class="ai-info-bar-avatar-placeholder-{{ ai_gen_id }}">
+            {{ 'image' | placeholder_svg_tag }}
+          </div>
+        {% endif %}
+      </div>
+      <div class="ai-info-bar-text-{{ ai_gen_id }}">
+        {% if block.settings.text_line_1 != blank %}
+          <p class="ai-info-bar-text-line-1-{{ ai_gen_id }}">{{ block.settings.text_line_1 }}</p>
+        {% endif %}
+        {% if block.settings.text_line_2 != blank %}
+          <p class="ai-info-bar-text-line-2-{{ ai_gen_id }}">{{ block.settings.text_line_2 }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="ai-info-bar-right-{{ ai_gen_id }}">
+      {% if block.settings.price_text != blank %}
+        <p class="ai-info-bar-price-{{ ai_gen_id }}">{{ block.settings.price_text }}</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Info bar",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f3f3f3"
+    },
+    {
+      "type": "range",
+      "id": "vertical_padding",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Avatar"
+    },
+    {
+      "type": "image_picker",
+      "id": "avatar_image",
+      "label": "Avatar image"
+    },
+    {
+      "type": "range",
+      "id": "avatar_size",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Avatar size",
+      "default": 60
+    },
+    {
+      "type": "color",
+      "id": "avatar_background",
+      "label": "Avatar background",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "range",
+      "id": "avatar_text_gap",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "label": "Gap between avatar and text",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Text line 1"
+    },
+    {
+      "type": "text",
+      "id": "text_line_1",
+      "label": "Text line 1",
+      "default": "Product Name"
+    },
+    {
+      "type": "range",
+      "id": "text_line_1_size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "text_line_1_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "text_line_1_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Text line 2"
+    },
+    {
+      "type": "text",
+      "id": "text_line_2",
+      "label": "Text line 2",
+      "default": "Additional information"
+    },
+    {
+      "type": "range",
+      "id": "text_line_2_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "text_line_2_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "color",
+      "id": "text_line_2_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "text_line_gap",
+      "min": 2,
+      "max": 15,
+      "step": 1,
+      "unit": "px",
+      "label": "Gap between text lines",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Price"
+    },
+    {
+      "type": "text",
+      "id": "price_text",
+      "label": "Price text",
+      "default": "£19.99"
+    },
+    {
+      "type": "range",
+      "id": "price_size",
+      "min": 14,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Font size",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "price_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Info bar"
+    }
+  ]
+}
 {% endschema %}
