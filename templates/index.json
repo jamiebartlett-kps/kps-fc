@@ -120,6 +120,7 @@
         "column2",
         "column3"
       ],
+      "name": "Core Values",
       "settings": {
         "title": "",
         "heading_size": "h1",
@@ -176,7 +177,7 @@
         "column_Kph3an",
         "column_FWVXEi"
       ],
-      "name": "t:sections.multicolumn.presets.name",
+      "name": "How Riverford Works",
       "settings": {
         "title": "How Riverford Works",
         "heading_size": "h0",
@@ -222,6 +223,7 @@
       "block_order": [
         "ai_gen_block_7a28a71_keUEmV"
       ],
+      "name": "Hear from our customers",
       "settings": {}
     },
     "collage": {
