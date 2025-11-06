@@ -51,7 +51,7 @@
     height: 100%;
     background-color: {{ block.settings.overlay_color }};
     opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};
-    display: block;
+    display: block !important;
   }
 
   .ai-product-banner__content-{{ ai_gen_id }} {
