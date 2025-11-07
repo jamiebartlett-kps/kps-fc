@@ -526,5 +526,9 @@
       "expanded": "Формулярът за получател на ваучер за подарък е разгънат",
       "collapsed": "Формулярът за получател на ваучер за подарък е свит"
     }
+  },
+  "custom":{
+    "delivery_schedule_html": "Your delivery<br> schedule",
+    "sign_in_html" : "Sign in or<br> create account"
   }
 }

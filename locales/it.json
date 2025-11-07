@@ -538,5 +538,9 @@
       "expanded": "Modulo destinatario del buono regalo espanso",
       "collapsed": "Modulo destinatario del buono regalo compresso"
     }
+  },
+  "custom":{
+    "delivery_schedule_html": "Your delivery<br> schedule",
+    "sign_in_html" : "Sign in or<br> create account"
   }
 }

@@ -1,0 +1,131 @@
+{% comment %}
+  Renders a header search modal. Should be used with 'header.liquid'
+
+  Accepts:
+  - input_id: {String} Id for the search input element (required)
+
+  Usage:
+  {% render 'header-search', input_id: 'My-Id'%}
+{% endcomment %}
+
+{%- style -%}
+  .riverford-search-wrapper {
+    display: flex;
+    position: relative;
+  }
+
+  .riverford-search-input {
+    flex-grow: 1;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-right: 0;
+    font-size: 16px;
+    font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
+    font-weight: var(--font-body-weight);
+  }
+
+  .riverford-search-input[type='search']::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 0;
+    width: 0;
+  }
+
+  .riverford-clear-button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-left: 0;
+    background: white;
+    position: absolute;
+    right: 40px;
+  }
+
+  .riverford-search-button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-left: 0;
+    background: white;
+  }
+
+  @media screen and (max-width: 599px) {
+    .riverford-search-wrapper {
+      display: none !important;
+    }
+  }
+
+  @media screen and (min-width: 961px) {
+    .header .riverford-search-webcomp {
+      width: 100%;
+    }
+  }
+
+  @media screen and (min-width: 1400px) {
+    .header .riverford-search-webcomp {
+      flex: 0 0 50%;
+    }
+  }
+{%- endstyle -%}
+
+{%- if settings.predictive_search_enabled -%}
+  <predictive-search class="riverford-search-webcomp" data-loading-text="{{ 'accessibility.loading' | t }}">
+{%- else -%}
+  <search-form class="">
+{%- endif -%}
+<form action="{{ routes.search_url }}" method="get" role="search" class="">
+  <div class="riverford-search-wrapper">
+    <input
+      id="{{ input_id }}"
+      class="riverford-search-input"
+      type="search"
+      name="q"
+      value="{{ search.terms | escape }}"
+      placeholder="{{ 'general.search.search' | t }}"
+      {%- if settings.predictive_search_enabled -%}
+        role="combobox"
+        aria-expanded="false"
+        aria-owns="predictive-search-results"
+        aria-controls="predictive-search-results"
+        aria-haspopup="listbox"
+        aria-autocomplete="list"
+        autocorrect="off"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+      {%- endif -%}
+    >
+    <input type="hidden" name="options[prefix]" value="last">
+    <button
+      type="reset"
+      class="riverford-clear-button {% if search.terms == blank %} hidden{% endif %}"
+      aria-label="{{ 'general.search.reset' | t }}"
+    >
+      {{ 'general.search.reset' | t }}
+    </button>
+    <button class="riverford-search-button" aria-label="{{ 'general.search.search' | t }}">
+      <span class="svg-wrapper">
+        {{- 'icon-search.svg' | inline_asset_content -}}
+      </span>
+    </button>
+  </div>
+
+  {%- if settings.predictive_search_enabled -%}
+    <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+      {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
+    </div>
+
+    <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+  {%- endif -%}
+</form>
+{%- if settings.predictive_search_enabled -%}
+  </predictive-search>
+{%- else -%}
+  </search-form>
+{%- endif -%}

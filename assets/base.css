@@ -3622,3 +3622,31 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+
+.icon {
+  font-size: 0;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon:after {
+  font-family: "rf-icons";
+}
+
+.icon--calander:after {
+  content: "\e81f";
+  font-size: 36px;
+}
+
+.icon--user:after {
+  content: "\e812";
+  font-size: 24px;
+}
+
+.icon--search:after {
+  content: "\e807";
+  font-size: 24px;
+}

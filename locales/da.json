@@ -526,5 +526,9 @@
       "expanded": "Formularen til modtager af gavekort er vist",
       "collapsed": "Formularen til modtager af gavekort er skjult"
     }
+  },
+  "custom":{
+    "delivery_schedule_html": "Your delivery<br> schedule",
+    "sign_in_html" : "Sign in or<br> create account"
   }
 }

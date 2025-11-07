@@ -538,5 +538,9 @@
       "expanded": "Formulario del destinatario de la tarjeta de regalo expandido",
       "collapsed": "Formulario del destinatario de tarjeta de regalo contraído"
     }
+  },
+  "custom":{
+    "delivery_schedule_html": "Your delivery<br> schedule",
+    "sign_in_html" : "Sign in or<br> create account"
   }
 }

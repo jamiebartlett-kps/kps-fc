@@ -526,5 +526,9 @@
       "expanded": "Η φόρμα παραλήπτη δωροκάρτας αναπτύχθηκε",
       "collapsed": "Η φόρμα παραλήπτη δωροκάρτας συμπτύχθηκε"
     }
+  },
+  "custom":{
+    "delivery_schedule_html": "Your delivery<br> schedule",
+    "sign_in_html" : "Sign in or<br> create account"
   }
 }

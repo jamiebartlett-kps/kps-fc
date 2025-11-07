@@ -538,5 +538,9 @@
       "expanded": "Obrazac primatelja poklon-kartice je povećan",
       "collapsed": "Obrazac primatelja poklon-kartice je smanjen"
     }
+  },
+  "custom":{
+    "delivery_schedule_html": "Your delivery<br> schedule",
+    "sign_in_html" : "Sign in or<br> create account"
   }
 }

@@ -139,6 +139,14 @@
         font-display: swap;
       }
 
+      @font-face {
+        font-family: 'rf-icons';
+        src: url('{{ 'rf-icons.woff2' | asset_url }}') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
       :root {
         --font-body-family: {{ settings.type_body_font }}, system-ui, sans-serif;
         --font-body-style: {{ settings.type_body_font.style }};

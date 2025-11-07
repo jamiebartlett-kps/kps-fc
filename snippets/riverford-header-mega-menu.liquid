@@ -1,0 +1,448 @@
+{% comment %}
+  Renders a megamenu for the header.
+
+  Usage:
+  {% render 'header-mega-menu' %}
+{% endcomment %}
+
+{%- style -%}
+  /* layout & visibility */
+
+  nav.riverford-nav a {
+    color: #000;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .js-first-level-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .first-level-link {
+    box-sizing: border-box;
+    font-size: 14px;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .first-level-link[aria-expanded='true'] {
+    font-weight: bold;
+  }
+
+  .second-level-links {
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+
+    display: block;
+    justify-content: center;
+    width: 100%;
+    padding: 0 50px;
+  }
+
+  .second-level-links.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .second-level-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    list-style: none;
+  }
+
+  .second-level-links li {
+    flex-grow: 1;
+    text-align: center;
+    position: relative;
+  }
+
+  .second-level-link {
+    font-size: 18px;
+    display: block;
+    height: 52px;
+    line-height: 52px;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .second-level-link[aria-expanded='true'] {
+    background-color: #f8f5f0;
+  }
+
+  .js-third-level-links {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: -20px;
+    width: calc(100% + 40px);
+  }
+
+  .js-third-level-links.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .js-third-level-links li {
+    padding: 10px 0;
+    background-color: #f8f5f0;
+  }
+
+  @media screen and (max-width: 960px) {
+    nav.riverford-nav {
+      grid-row-start: 2;
+      grid-column-start: 1;
+      grid-column-end: span 3;
+      background: #ffffff;
+    }
+
+    .js-first-level-links li {
+      flex-grow: 1;
+    }
+
+    .js-first-level-links li:first-of-type .first-level-link {
+      color: rgb(211, 32, 102);
+      font-weight: bold;
+    }
+
+    .second-level-links {
+      background-color: #f8f5f0;
+    }
+
+    .js-third-level-links {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 961px) {
+    .first-level-link {
+      padding: 20px 10px;
+      font-size: 16px;
+      display: block;
+      height: 73px;
+    }
+
+    .first-level-link[aria-expanded='true'] {
+      border-bottom-color: rgba(211, 32, 102, 1);
+      background-color: rgba(211, 32, 102, 0.06);
+    }
+
+    .second-level-list {
+      flex-direction: row;
+    }
+
+    .second-level-link {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 990px) {
+    .first-level-link {
+      padding: 20px 30px;
+      font-size: 18px;
+    }
+
+    .js-first-level-links li:first-of-type [id^='MegaMenu-Content-'] {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+  }
+{%- endstyle -%}
+
+<nav class="riverford-nav">
+  <ul role="list" class="js-first-level-links">
+    {%- for link in section.settings.menu.links -%}
+      <li>
+        {%- if link.links != blank -%}
+          <div
+            id="Details-HeaderMenu-{{ forloop.index }}"
+          >
+            <a
+              id="HeaderMenu-{{ link.handle }}"
+              class="first-level-link"
+              href="{{ link.url }}"
+              tabindex="0"
+              aria-haspopup="true"
+            >
+              {{- link.title | escape -}}
+            </a>
+            <div
+              id="MegaMenu-Content-{{ forloop.index }}"
+              class="second-level-links color-{{ section.settings.menu_color_scheme }}"
+              tabindex="-1"
+              role="region"
+              aria-labelledby="HeaderMenu-{{ link.handle }}"
+            >
+              <ul
+                class="second-level-list page-width"
+                role="list"
+              >
+                {%- for childlink in link.links -%}
+                  <li>
+                    <a
+                      id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                      href="{{ childlink.url }}"
+                      class="second-level-link {% if childlink.current %} active{% endif %}"
+                      {% if childlink.current %}
+                        aria-current="page"
+                      {% endif %}
+                      tabindex="0"
+                      {%- if childlink.links != blank -%}
+                        aria-haspopup="true"
+                      {%- else -%}
+                        aria-haspopup="false"
+                      {%- endif -%}
+                    >
+                      {{ childlink.title | escape }}
+                    </a>
+                    {%- if childlink.links != blank -%}
+                      <ul
+                        role="list"
+                        class="js-third-level-links"
+                        aria-hidden="true"
+                        data-parent="{{ link.handle }}-{{ childlink.handle }}"
+                      >
+                        {%- for grandchildlink in childlink.links -%}
+                          <li>
+                            <a
+                              id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                              href="{{ grandchildlink.url }}"
+                              class="{% if grandchildlink.current %} active{% endif %}"
+                              {% if grandchildlink.current %}
+                                aria-current="page"
+                              {% endif %}
+                              tabindex="-1"
+                            >
+                              {{ grandchildlink.title | escape }}
+                            </a>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          </div>
+        {%- else -%}
+          <a
+            id="HeaderMenu-{{ link.handle }}"
+            href="{{ link.url }}"
+            {% if link.current %}
+              aria-current="page"
+            {% endif %}
+          >
+            <span
+              {%- if link.current %}
+                class="active"
+              {% endif %}
+            >
+              {{- link.title | escape -}}
+            </span>
+          </a>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</nav>
+<script>
+  (function () {
+    const DESKTOP_BREAK = 961;
+    const nav = document.querySelector('nav');
+    if (!nav) return;
+
+    const topItems = Array.from(document.querySelectorAll('.js-first-level-links > li'));
+    const headerButtons = topItems.map((li) => li.querySelector('[id^="HeaderMenu-"]'));
+    const megaContents = topItems.map((li) => li.querySelector('[id^="MegaMenu-Content-"]'));
+
+    function isDesktop() {
+      return window.innerWidth >= DESKTOP_BREAK;
+    }
+
+    function hideAllContents() {
+      megaContents.forEach((c, i) => {
+        if (!c) return;
+        c.classList.remove('is-visible');
+        const header = headerButtons[i];
+        if (header) header.setAttribute('aria-expanded', 'false');
+      });
+      // hide all third-levels
+      document.querySelectorAll('.js-third-level-links').forEach((t) => {
+        t.classList.remove('is-visible');
+        t.setAttribute('aria-hidden', 'true');
+      });
+    }
+
+    function showContent(index) {
+      if (!megaContents[index]) return;
+      hideAllContents();
+      megaContents[index].classList.add('is-visible');
+      const header = headerButtons[index];
+      if (header) header.setAttribute('aria-expanded', 'true');
+    }
+
+    function restoreDefaultDesktop() {
+      // show only first content on desktop by default
+      hideAllContents();
+      const first = megaContents[0];
+      if (first && isDesktop()) {
+        first.classList.add('is-visible');
+        if (headerButtons[0]) headerButtons[0].setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    // top-level hover/focus handlers
+    headerButtons.forEach((btn, index) => {
+      if (!btn) return;
+      const container = btn.closest('[id^="Details-HeaderMenu-"]');
+
+      // ensure aria-controls
+      const content = container && container.querySelector('[id^="MegaMenu-Content-"]');
+      if (content) {
+        btn.setAttribute('aria-controls', content.id);
+        btn.setAttribute('aria-expanded', 'false');
+      }
+
+      // desktop: hover/focus opens content (transient)
+      btn.addEventListener(
+        'mouseenter',
+        () => {
+          if (!isDesktop()) return;
+          showContent(index);
+        },
+        { passive: true }
+      );
+
+      btn.addEventListener('focusin', () => {
+        if (!isDesktop()) return;
+        showContent(index);
+      });
+
+      // keep content visible while pointer inside the Details container
+      if (container) {
+        container.addEventListener('mouseleave', (e) => {
+          if (!isDesktop()) return;
+          // when leaving the entire details block, restore default (first open)
+          restoreDefaultDesktop();
+        });
+      }
+
+      // mobile/tablet: click toggles
+      btn.addEventListener('click', (e) => {
+        if (isDesktop()) return;
+        e.preventDefault();
+        const isOpen = content && content.classList.contains('is-visible');
+        if (isOpen) {
+          if (content) content.classList.remove('is-visible');
+          btn.setAttribute('aria-expanded', 'false');
+        } else {
+          hideAllContents();
+          if (content) content.classList.add('is-visible');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // third-level handlers: show on hover/focus of child link
+    document.querySelectorAll('[id^="MegaMenu-Content-"] a[aria-haspopup="true"]').forEach((anchor) => {
+      const parentLi = anchor.closest('li');
+      const third = parentLi && parentLi.querySelector('.js-third-level-links');
+
+      if (!third) return;
+
+      anchor.addEventListener(
+        'mouseenter',
+        () => {
+          third.classList.add('is-visible');
+          third.setAttribute('aria-hidden', 'false');
+          anchor.setAttribute('aria-expanded', 'true'); // Add this line
+        },
+        { passive: true }
+      );
+      anchor.addEventListener('focusin', () => {
+        third.classList.add('is-visible');
+        third.setAttribute('aria-hidden', 'false');
+        anchor.setAttribute('aria-expanded', 'true'); // Add this line
+      });
+
+      // hide when leaving that li
+      if (parentLi) {
+        parentLi.addEventListener('mouseleave', () => {
+          third.classList.remove('is-visible');
+          third.setAttribute('aria-hidden', 'true');
+          anchor.setAttribute('aria-expanded', 'false'); // Add this line
+        });
+        parentLi.addEventListener('focusout', (e) => {
+          // if focus moved outside the parent li, hide
+          if (!parentLi.contains(e.relatedTarget)) {
+            third.classList.remove('is-visible');
+            third.setAttribute('aria-hidden', 'true');
+            anchor.setAttribute('aria-expanded', 'false'); // Add this line
+          }
+        });
+      }
+    });
+
+    // Hide transient menus on escape
+    document.addEventListener('keyup', (e) => {
+      if (e.key === 'Escape') {
+        hideAllContents();
+        if (isDesktop()) restoreDefaultDesktop();
+      }
+    });
+
+    // mouse leaving nav -> restore default on desktop
+    nav.addEventListener('mouseleave', () => {
+      if (isDesktop()) restoreDefaultDesktop();
+    });
+
+    // update on resize: ensure default state
+    window.addEventListener('resize', () => {
+      setTimeout(() => {
+        if (isDesktop()) {
+          restoreDefaultDesktop();
+        } else {
+          hideAllContents();
+        }
+      }, 50);
+    });
+
+    // initial state
+    document.addEventListener('DOMContentLoaded', () => {
+      if (isDesktop()) {
+        restoreDefaultDesktop();
+      } else {
+        hideAllContents();
+      }
+    });
+
+    // in case snippet is included after DOMContentLoaded
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      if (isDesktop()) restoreDefaultDesktop();
+      else hideAllContents();
+    }
+  })();
+</script>

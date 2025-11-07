@@ -526,5 +526,9 @@
       "expanded": "기프트 카드 수신자 양식 펼치기",
       "collapsed": "기프트 카드 수신자 양식 접기"
     }
+  },
+  "custom":{
+    "delivery_schedule_html": "Your delivery<br> schedule",
+    "sign_in_html" : "Sign in or<br> create account"
   }
 }
