@@ -81,9 +81,9 @@ predictive-search[loading] .predictive-search {
   .predictive-search__result-group:first-child .predictive-search__pages-wrapper {
     display: initial;
   }
-  .predictive-search__result-group:first-child {
+  /* .predictive-search__result-group:first-child {
     flex: 0 0 26.4rem;
-  }
+  } */
   .predictive-search__results-groups-wrapper--no-products .predictive-search__result-group:first-child,
   .predictive-search__result-group:only-child {
     flex-grow: 1;
