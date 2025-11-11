@@ -1,7 +1,7 @@
 // c:/Dev/shopify_food/kps-fc/postcss.config.js
 module.exports = {
   plugins: {
-    tailwindcss: {},
+    '@tailwindcss/postcss': {},
     autoprefixer: {},
   },
 };
