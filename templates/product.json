@@ -16,6 +16,7 @@
           "type": "ai_gen_block_9eee9fd",
           "settings": {
             "banner_image": "{{ closest.product.metafields.custom.banner_image.value }}",
+            "alt_banner_image": "{{ closest.product.metafields.custom.alt_banner_image.value }}",
             "image_position": "center",
             "banner_height_desktop": 400,
             "banner_height_mobile": 400,
