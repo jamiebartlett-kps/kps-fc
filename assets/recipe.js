@@ -28,6 +28,21 @@ function renderRecipe(data) {
     // Description
     document.getElementById('recipe-description').textContent = data.description;
 
+    // Products
+    const products = data.ingredients.filter(({ product }) => product.shopifyId).map(({ product }) => product);
+    if (products.length > 0) {
+        const productsCarousel = document.getElementById('recipe-products');
+        productsCarousel.style.display = "block";
+        productsCarousel.querySelector('.carousel-track').innerHTML = products.map(({ shopifyId, shopifyTitle, shopifyImageUrl, shopifyPrice }) => `
+            <a class="carousel-item" href="/products/${shopifyId}">
+                <img class="carousel-product-image" src="${shopifyImageUrl}" alt="${shopifyTitle}" width="100" height="100" />
+                <div class="carousel-product-name">${shopifyTitle}</div>
+                <div class="carousel-product-price">£${Number(shopifyPrice).toFixed(2)}</div>
+            </a>
+        `).join('\n');
+    }
+
+
     // Ingredients
     const ingredientsList = document.getElementById('ingredients-list');
     ingredientsList.innerHTML = data.ingredients.map(ing => {
