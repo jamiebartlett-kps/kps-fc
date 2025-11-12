@@ -114,6 +114,10 @@
           "type": "description",
           "settings": {}
         },
+        "recharge_subscriptions_subscription_widget_v2_DJmDwr": {
+          "type": "shopify://apps/recharge-subscriptions/blocks/subscription-widget-v2/371eed76-0b44-4869-9813-730372ea378e",
+          "settings": {}
+        },
         "collapsible-row-0": {
           "type": "collapsible_tab",
           "settings": {
@@ -166,6 +170,7 @@
         "quantity_selector",
         "buy_buttons",
         "description",
+        "recharge_subscriptions_subscription_widget_v2_DJmDwr",
         "collapsible-row-0",
         "collapsible-row-1",
         "collapsible-row-2",
