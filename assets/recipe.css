@@ -1,3 +1,78 @@
+.carousel-product-image {
+    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+.carousel-item:hover .carousel-product-image {
+    transform: scale(1.08);
+}
+.carousel-product-price {
+    font-size: 1.05rem;
+    color: #5a9d3d;
+    font-weight: 600;
+    margin-top: 0.3rem;
+}
+/* Product Carousel Styles */
+.product-carousel {
+    margin: 2rem 0 3rem 0;
+    background: #fff;
+    border-radius: 8px;
+    padding: 2rem 1rem 1.5rem 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.carousel-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    color: #1a1a1a;
+    border-bottom: 2px solid #5a9d3d;
+    padding-bottom: 0.5rem;
+}
+.carousel-track {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+}
+.carousel-item {
+    min-width: 160px;
+    background: #f8f8f8;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    padding: 1rem 0.5rem;
+    text-align: center;
+    flex: 0 0 auto;
+    transition: box-shadow 0.2s;
+}
+.carousel-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 0.7rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.carousel-product-name {
+    font-size: 1rem;
+    color: #333;
+    margin-top: 0.3rem;
+}
+.carousel-item:hover {
+    box-shadow: 0 4px 12px rgba(90,157,61,0.10);
+}
+@media (max-width: 768px) {
+    .carousel-track {
+        gap: 1rem;
+    }
+    .carousel-item {
+        min-width: 120px;
+        padding: 0.7rem 0.3rem;
+    }
+    .carousel-item img {
+        width: 70px;
+        height: 70px;
+    }
+}
 * {
     margin: 0;
     padding: 0;
