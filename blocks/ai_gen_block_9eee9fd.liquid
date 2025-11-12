@@ -127,6 +127,15 @@
         height="{{ block.settings.banner_image.height }}"
         class="ai-product-banner__image-{{ ai_gen_id }}"
       >
+    {% elsif block.settings.alt_banner_image %}
+      <img
+        src="{{ block.settings.alt_banner_image }}"
+        sizes="100vw"
+        loading="lazy"
+        width="{{ block.settings.banner_image.width }}"
+        height="{{ block.settings.banner_image.height }}"
+        class="ai-product-banner__image-{{ ai_gen_id }}"
+      >
     {% else %}
       <div class="ai-product-banner__placeholder-{{ ai_gen_id }}">
         {{ 'hero-apparel-1' | placeholder_svg_tag }}
