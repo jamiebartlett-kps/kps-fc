@@ -1,3 +1,262 @@
 /* c:/Dev/shopify_food/kps-fc/assets/application.css */
 @import "tailwindcss";
 @config "../tailwind.config.js";
+
+@layer components {
+  h1.h1.typography--h1,
+  .h1.typography--h1,
+  h1.typography--h1,
+  .typography--h1 {
+    @apply text-h1 font-heading;
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+  }
+
+  h2.h2.typography--h2,
+  .h2.typography--h2,
+  h2.typography--h2,
+  .typography--h2 {
+    @apply text-h2 font-heading;
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+  }
+
+  h3.h3.typography--h3,
+  .h3.typography--h3,
+  h3.typography--h3,
+  .typography--h3 {
+    @apply text-h3 font-heading;
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+  }
+
+  h4.h4.typography--h4,
+  .h4.typography--h4,
+  h4.typography--h4,
+  .typography--h4 {
+    @apply text-h4 font-heading;
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+  }
+
+  h5.h5.typography--h5,
+  .h5.typography--h5,
+  h5.typography--h5,
+  .typography--h5 {
+    @apply text-h5 font-heading;
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+  }
+
+  h6.h6.typography--h6,
+  .h6.typography--h6,
+  h6.typography--h6,
+  .typography--h6 {
+    @apply text-h6 font-heading;
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+  }
+
+  h7.h7.typography--h7,
+  .h7.typography--h7,
+  h7.typography--h7,
+  .typography--h7 {
+    @apply text-h7 font-heading;
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+  }
+
+  h8.h8.typography--h8,
+  .h8.typography--h8,
+  h8.typography--h8,
+  .typography--h8 {
+    @apply text-h8 font-heading;
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+  }
+
+  h9.h9.typography--h9,
+  .h9.typography--h9,
+  h9.typography--h9,
+  .typography--h9 {
+    @apply text-h9 font-heading;
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+  }
+
+  h10.h10.typography--h10,
+  .h10.typography--h10,
+  h10.typography--h10,
+  .typography--h10 {
+    @apply text-h10 font-heading;
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+  }
+
+  h11.h11.typography--h11,
+  .h11.typography--h11,
+  h11.typography--h11,
+  .typography--h11 {
+    @apply text-h11 font-heading;
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+  }
+
+  h12.h12.typography--h12,
+  .h12.typography--h12,
+  h12.typography--h12,
+  .typography--h12 {
+    @apply text-h12 font-heading;
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+  }
+
+  p.body-sm.typography--body-sm,
+  .body-sm.typography--body-sm,
+  p.typography--body-sm,
+  .typography--body-sm {
+    @apply text-body-sm font-body;
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
+    font-style: var(--font-body-style);
+  }
+
+  p.body-md.typography--body-md,
+  .body-md.typography--body-md,
+  p.typography--body-md,
+  .typography--body-md {
+    @apply text-body-md font-body;
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
+    font-style: var(--font-body-style);
+  }
+
+  p.body-lg.typography--body-lg,
+  .body-lg.typography--body-lg,
+  p.typography--body-lg,
+  .typography--body-lg {
+    @apply text-body-lg font-body;
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
+    font-style: var(--font-body-style);
+  }
+
+  p.body-xl.typography--body-xl,
+  .body-xl.typography--body-xl,
+  p.typography--body-xl,
+  .typography--body-xl {
+    @apply text-body-xl font-body;
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
+    font-style: var(--font-body-style);
+  }
+}
+
+/* ===== Responsive overrides for headings ===== */
+@media only screen and (min-width: 750px) {
+  h1.h1.typography--h1,
+  .h1.typography--h1,
+  h1.typography--h1,
+  .typography--h1 {
+    font-size: 64px;
+  }
+
+  h2.h2.typography--h2,
+  .h2.typography--h2,
+  h2.typography--h2,
+  .typography--h2 {
+    font-size: 48px;
+  }
+
+  h3.h3.typography--h3,
+  .h3.typography--h3,
+  h3.typography--h3,
+  .typography--h3 {
+    font-size: 42px;
+  }
+
+  h4.h4.typography--h4,
+  .h4.typography--h4,
+  h4.typography--h4,
+  .typography--h4 {
+    font-size: 38px;
+  }
+
+  h5.h5.typography--h5,
+  .h5.typography--h5,
+  h5.typography--h5,
+  .typography--h5 {
+    font-size: 34px;
+  }
+
+  h6.h6.typography--h6,
+  .h6.typography--h6,
+  h6.typography--h6,
+  .typography--h6 {
+    font-size: 30px;
+  }
+
+  h7.h7.typography--h7,
+  .h7.typography--h7,
+  h7.typography--h7,
+  .typography--h7 {
+    font-size: 28px;
+  }
+
+  h8.h8.typography--h8,
+  .h8.typography--h8,
+  h8.typography--h8,
+  .typography--h8 {
+    font-size: 26px;
+  }
+
+  h9.h9.typography--h9,
+  .h9.typography--h9,
+  h9.typography--h9,
+  .typography--h9 {
+    font-size: 24px;
+  }
+
+  h10.h10.typography--h10,
+  .h10.typography--h10,
+  h10.typography--h10,
+  .typography--h10 {
+    font-size: 22px;
+  }
+
+  h11.h11.typography--h11,
+  .h11.typography--h11,
+  h11.typography--h11,
+  .typography--h11 {
+    font-size: 20px;
+  }
+
+  h12.h12.typography--h12,
+  .h12.typography--h12,
+  h12.typography--h12,
+  .typography--h12 {
+    font-size: 18px;
+  }
+
+  modal-dialog {
+    @apply fixed inset-0 z-50 flex items-center justify-center
+           bg-black/60 transition-opacity duration-300 ease-in-out
+           opacity-0 pointer-events-none;
+  }
+
+  modal-dialog[open] {
+    @apply opacity-100 pointer-events-auto;
+  }
+}

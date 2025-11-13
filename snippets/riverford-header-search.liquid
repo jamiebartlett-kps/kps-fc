@@ -109,7 +109,10 @@
     >
       {{ 'general.search.reset' | t }}
     </button>
-    <button class="riverford-search-button" aria-label="{{ 'general.search.search' | t }}">
+    <button
+      class="riverford-search-button flex justify-center items-center"
+      aria-label="{{ 'general.search.search' | t }}"
+    >
       <span class="svg-wrapper">
         {{- 'icon-search.svg' | inline_asset_content -}}
       </span>

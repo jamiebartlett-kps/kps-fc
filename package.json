@@ -4,7 +4,8 @@
   "description": "[![Build status](https://github.com/shopify/dawn/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Shopify/dawn/actions/workflows/ci.yml?query=branch%3Amain)\r [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?color=informational)](/.github/CONTRIBUTING.md)",
   "main": "index.js",
   "scripts": {
-    "tailwind": "tailwindcss -i ./assets/application.css -o ./assets/tailwind.css --watch"
+    "tailwind": "tailwindcss -i ./assets/application.css -o ./assets/tailwind.css --watch",
+    "tailwind:build": "tailwindcss -i ./assets/application.css -o ./assets/tailwind.css --minify"
   },
   "repository": {
     "type": "git",

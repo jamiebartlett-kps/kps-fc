@@ -1,0 +1,172 @@
+<modal-dialog id="SlotFinder">
+  <div
+    class="relative w-auto min-w-md max-w-3xl rounded-2xl bg-white p-8 shadow-xl"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="slot-finder-title"
+  >
+    <button
+      id="slot-finder-close-x"
+      class="absolute right-3 top-3 text-white focus:outline-none bg-black hover:bg-gray-800 border-2 border-white rounded-full w-10 h-10"
+      aria-label="Close modal"
+    >
+      ✕
+    </button>
+    <div class="js-empty-state flex-col gap-y-6 text-center max-w-md hidden">
+      <h3 class="!italic typography--h7 text-center underline">Delivery unavailable</h3>
+      <p>Unfortunately we can't currently deliver to sdfgdfgd.</p>
+      <p>If your delivery address has changed please enter your postcode below.</p>
+    </div>
+    <div id="slot-results" class="js-slots-available flex flex-col justify-center items-center"></div>
+  </div>
+</modal-dialog>
+
+<div
+  class="js-pdp-info-block md:sticky top-0 md:h-20 flex items-center z-10"
+  style="background-color: {{ block.settings.bg_color }};"
+>
+  <div class="page-width w-full flex max-md:flex-col max-md:gap-y-3 max-md:items-center md:gap-x-3 max-md:!pb-8">
+    {% assign grower = product.metafields.custom.grower.value %}
+    {% assign avatar = grower.avatar.value %}
+    <div class="block w-28 h-28 md:w-20 md:h-20 relative shrink-0">
+      <img
+        class="js-pdp-grow-avatar rounded-full border-white border-2 absolute -top-5 right-0 w-full"
+        src="{{ avatar | image_url: width: 100 }}"
+        alt="{{ grower.name }}"
+        width="80"
+        height="80"
+      >
+      {% if product.featured_image %}
+        <img
+          class="js-pdp-feature-image rounded-full border-white border-2 w-full hidden"
+          src="{{ product.featured_image | image_url: width: 100 }}"
+          alt="{{ product.featured_image.alt | escape }}"
+          width="80"
+          height="80"
+        >
+      {% endif %}
+    </div>
+    <div class="flex flex-col justify-center">
+      <p class="typography--body-sm font-bold max-md:text-center">
+        {{ product.title }}
+      </p>
+      <p class="typography--body-sm font-bold max-md:text-center">
+        {{ product.metafields.custom.grow_verb }} by {{ grower.name }}
+        {{ grower.location }}
+      </p>
+    </div>
+
+    <div class="flex max-md:flex-col gap-2 justify-center items-center md:ml-auto">
+      <div
+        id="price-{{ section.id }}"
+        role="status"
+        {{ block.shopify_attributes }}
+        class="typography--body-sm font-bold whitespace-nowrap"
+      >
+        {%- render 'price', product: product, use_variant: true, show_badges: true -%}
+      </div>
+
+      {%- if product.quantity_price_breaks_configured? -%}
+        <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
+          <span>{{ 'products.product.volume_pricing.note' | t }}</span>
+        </div>
+      {%- endif -%}
+
+      {%- if cart.taxes_included or cart.duties_included or shop.shipping_policy.body != blank -%}
+        <div class="product__tax caption rte hidden">
+          {%- if cart.duties_included and cart.taxes_included -%}
+            {{ 'products.product.duties_and_taxes_included' | t }}
+          {%- elsif cart.taxes_included -%}
+            {{ 'products.product.taxes_included' | t }}
+          {%- elsif cart.duties_included -%}
+            {{ 'products.product.duties_included' | t }}
+          {%- endif -%}
+
+          {%- if shop.shipping_policy.body != blank -%}
+            {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div {{ block.shopify_attributes }}>
+        {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
+        {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          {{ form | payment_terms }}
+        {%- endform -%}
+      </div>
+
+      {%- render 'buy-buttons',
+        block: block,
+        product: product,
+        product_form_id: product_form_id,
+        section_id: section.id,
+        show_pickup_availability: true,
+        custom_class: 'w-full max-w-[200px] min-w-[180px] h-10 flex justify-center items-center',
+        custom_button_class: '!mb-0 !bg-[#a30062] hover:!bg-[#c20075] !text-white'
+      -%}
+    </div>
+
+    <div class="max-lg:hidden w-full lg:max-w-[300px] xl:max-w-[400px] relative">
+      <div class="js-pdp-find-slot w-full absolute left-0 -top-10 bg-white p-6 shadow-md transition-all duration-100">
+        {%- render 'slot-finder', modal: false -%}
+      </div>
+    </div>
+
+    {% comment %}
+      <modal-opener data-modal="#SlotFinder">
+        <button
+          id="SlotFinderButton-{{ section_id }}"
+          class="mb-4 slot-finder-button button button--secondary button--full-width"
+          type="button"
+        >
+          Find a Slot
+        </button>
+      </modal-opener>
+    {% endcomment %}
+
+    {% comment %}
+      <modal-dialog class="slot-finder-modal" id="SlotFinder">
+        {%- render 'slot-finder' -%}
+      </modal-dialog>
+    {% endcomment %}
+  </div>
+</div>
+
+<script>
+  const mediaQuery = window.matchMedia('(min-width: 768px)');
+
+  function handleScroll() {
+    const infoBlock = document.querySelector('.js-pdp-info-block');
+    const grower = document.querySelector('.js-pdp-grow-avatar');
+    const feature = document.querySelector('.js-pdp-feature-image');
+    const findSlot = document.querySelector('.js-pdp-find-slot');
+
+    const rect = infoBlock.getBoundingClientRect();
+
+    if (rect.top <= 0) {
+      infoBlock.classList.add('h-28');
+      grower.classList.add('hidden');
+      feature.classList.remove('hidden');
+      findSlot.classList.remove('-top-10');
+      findSlot.classList.add('top-0');
+    } else {
+      infoBlock.classList.remove('h-28');
+      grower.classList.remove('hidden');
+      feature.classList.add('hidden');
+      findSlot.classList.add('-top-10');
+      findSlot.classList.remove('top-0');
+    }
+  }
+
+  function toggleScrollListener(e) {
+    if (e.matches) {
+      window.addEventListener('scroll', handleScroll);
+    } else {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  }
+
+  mediaQuery.addEventListener('change', toggleScrollListener);
+  toggleScrollListener(mediaQuery);
+</script>

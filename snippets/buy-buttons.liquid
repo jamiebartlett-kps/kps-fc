@@ -10,7 +10,7 @@
   Usage:
   {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
 {% endcomment %}
-<div {{ block.shopify_attributes }}>
+<div {{ block.shopify_attributes }} class="{{ custom_class }}">
   {%- if product != blank -%}
     {%- liquid
       assign gift_card_recipient_feature_active = false
@@ -56,19 +56,14 @@
           class="product-variant-id"
         >
         {% if product.metafields.custom.back_image %}
-          {%-  render 'kit-customisation' -%}
-        {%  endif %}
+          {%- render 'kit-customisation' -%}
+        {% endif %}
 
         {%- if gift_card_recipient_feature_active -%}
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
         {%- endif -%}
-        
+
         <div class="product-form__buttons">
-          <modal-opener data-modal="#SlotFinder">
-            <button id="SlotFinderButton-{{ section_id }}" class="mb-4 slot-finder-button button button--secondary button--full-width" type="button">
-              Find a Slot
-            </button>
-          </modal-opener>
           {%- liquid
             assign check_against_inventory = true
             if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
@@ -82,7 +77,7 @@
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
             name="add"
-            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
+            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}  {{  custom_button_class }}"
             {% if product.selected_or_first_available_variant.available == false
               or quantity_rule_soldout
               or product.selected_or_first_available_variant == null
