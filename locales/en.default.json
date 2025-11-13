@@ -46,7 +46,7 @@
     },
     "search": {
       "search": "Search",
-      "reset": "Clear search term"
+      "reset": "Clear"
     },
     "cart": {
       "view": "View cart ({{ count }})",
@@ -271,10 +271,10 @@
       }
     },
     "kit": {
-      "custom" : {
-        "name" : "Name",
-        "number" : "Number",
-        "player" : "Player"
+      "custom": {
+        "name": "Name",
+        "number": "Number",
+        "player": "Player"
       }
     },
     "404": {
@@ -290,7 +290,6 @@
       "announcement": "Announcement",
       "announcement_bar": "Announcement bar"
     },
-
     "header": {
       "announcement": "Announcement",
       "menu": "Menu",
@@ -544,8 +543,8 @@
       "send_on_label": "Send on (optional)"
     }
   },
-  "custom":{
+  "custom": {
     "delivery_schedule_html": "Your delivery<br> schedule",
-    "sign_in_html" : "Sign in or<br> create account"
+    "sign_in_html": "Sign in or<br> create account"
   }
 }
