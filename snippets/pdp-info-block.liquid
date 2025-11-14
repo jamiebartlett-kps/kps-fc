@@ -14,7 +14,7 @@
     </button>
     <div class="js-empty-state flex-col gap-y-6 text-center max-w-md hidden">
       <h3 class="!italic typography--h7 text-center underline">Delivery unavailable</h3>
-      <p>Unfortunately we can't currently deliver to sdfgdfgd.</p>
+      <p>Unfortunately we can't currently deliver to your location.</p>
       <p>If your delivery address has changed please enter your postcode below.</p>
     </div>
     <div id="slot-results" class="js-slots-available flex flex-col justify-center items-center"></div>
@@ -112,24 +112,6 @@
         {%- render 'slot-finder', modal: false -%}
       </div>
     </div>
-
-    {% comment %}
-      <modal-opener data-modal="#SlotFinder">
-        <button
-          id="SlotFinderButton-{{ section_id }}"
-          class="mb-4 slot-finder-button button button--secondary button--full-width"
-          type="button"
-        >
-          Find a Slot
-        </button>
-      </modal-opener>
-    {% endcomment %}
-
-    {% comment %}
-      <modal-dialog class="slot-finder-modal" id="SlotFinder">
-        {%- render 'slot-finder' -%}
-      </modal-dialog>
-    {% endcomment %}
   </div>
 </div>
 

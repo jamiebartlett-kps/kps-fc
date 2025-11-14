@@ -80,6 +80,10 @@
           {% render 'pdp-hero-banner', block: block, product: product %}
         {% when 'pdp-info-block' %}
           {% render 'pdp-info-block', block: block, product: product %}
+        {% when 'pdp-about-block' %}
+          {% render 'pdp-about', block: block, product: product %}
+        {% when 'pdp-gallery-block' %}
+          {% render 'pdp-gallery', block: block, product: product %}
         {%- when 'text' -%}
           <p
             class="product__text inline-richtext{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"
@@ -624,87 +628,6 @@
       {%- endcase -%}
     {%- endfor -%}
   </div>
-  {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
-  <div class="page-width">
-    <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
-      <!-- Place this in your product template or near your gallery -->
-      {% if product.metafields.custom.back_image %}
-        <div
-          id="back-image"
-          style="display:none;"
-          data-image="{{ product.metafields.custom.back_image }}"
-        ></div>
-      {% endif %}
-      <div class="grid__item product__media-wrapper">
-        {% render 'product-media-gallery', variant_images: variant_images %}
-      </div>
-      <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-        <section
-          id="ProductInfo-{{ section.id }}"
-          class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
-        >
-          {%- assign product_form_id = 'product-form-' | append: section.id -%}
-
-          <a href="{{ product.url }}" class="link product__view-details animate-arrow">
-            {{ 'products.product.view_full_details' | t }}
-            {{- 'icon-arrow.svg' | inline_asset_content -}}
-          </a>
-        </section>
-      </div>
-    </div>
-
-    {% render 'product-media-modal', variant_images: variant_images %}
-
-    {% assign popups = section.blocks | where: 'type', 'popup' %}
-    {%- for block in popups -%}
-      <modal-dialog id="PopupModal-{{ block.id }}" class="product-popup-modal" {{ block.shopify_attributes }}>
-        <div
-          role="dialog"
-          aria-label="{{ block.settings.text }}"
-          aria-modal="true"
-          class="product-popup-modal__content"
-          tabindex="-1"
-        >
-          <button
-            id="ModalClose-{{ block.id }}"
-            type="button"
-            class="product-popup-modal__toggle"
-            aria-label="{{ 'accessibility.close' | t }}"
-          >
-            {{- 'icon-close.svg' | inline_asset_content -}}
-          </button>
-          <div class="product-popup-modal__content-info">
-            <h1 class="h2">{{ block.settings.page.title | escape }}</h1>
-            {{ block.settings.page.content }}
-          </div>
-        </div>
-      </modal-dialog>
-    {%- endfor -%}
-
-    {%- if product.media.size > 0 -%}
-      <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
-      <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
-
-    {%- if first_3d_model -%}
-      <script type="application/json" id="ProductJSON-{{ product.id }}">
-        {{ product.media | where: 'media_type', 'model' | json }}
-      </script>
-      <script src="{{ 'product-model.js' | asset_url }}" defer></script>
-    {%- endif -%}
-
-    {%- liquid
-      if product.selected_or_first_available_variant.featured_media
-        assign seo_media = product.selected_or_first_available_variant.featured_media
-      else
-        assign seo_media = product.featured_media
-      endif
-    -%}
-
-    <script type="application/ld+json">
-      {{ product | structured_data }}
-    </script>
-  </div>
 </product-info>
 
 {% schema %}
@@ -739,6 +662,14 @@
           "default": "#f4f4f4"
         }
       ]
+    },
+    {
+      "type": "pdp-about-block",
+      "name": "PDP about block"
+    },
+    {
+      "type": "pdp-gallery-block",
+      "name": "PDP gallery block"
     },
     {
       "type": "text",

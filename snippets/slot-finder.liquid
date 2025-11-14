@@ -1,39 +1,123 @@
 <div class="flex flex-col gap-8">
-  <h3 class="!italic typography--h8 text-center">
-    Find out your delivery day<br>
-    to start shopping...
-  </h3>
-  <form id="postcode-form" class="flex flex-col items-center gap-8">
-    <div class="w-full">
-      <label htmlFor="postcode-input" class="block typography--body-sm">Postcode</label>
-      <input
-        type="text"
-        id="postcode-input"
-        name="postcode"
-        placeholder="e.g., SW1A 1AA"
-        required
-        class="border w-full border-gray-400 p-2 bg-gray-100 rounded-sm"
-      >
-    </div>
-    <button
-      type="submit"
-      class="button button--secondary !bg-[#a30062] hover:!bg-[#c20075] !text-white"
-    >
-      Show my delivery day
-    </button>
-    <p>Or <span class="underline">sign in</span> to your account</p>
-  </form>
+  {% if cart.attributes.delivery_slot_id != blank %}
+    {% if cart.items != empty %}
+      <h3 class="typography--h2 text-center">Your order</h3>
+      <div class="bg-[#f2ede3] px-10 py-5 flex flex-col text-center">
+        <h3 class="typography--h6">Delivery slot details:</h3>
+        <p>
+          {{ cart.attributes.delivery_slot_postcode }}
+        </p>
+        <p>
+          <span class="capitalize">
+            {{ cart.attributes.delivery_slot_day }}
+          </span>
+          - {{ cart.attributes.delivery_slot_time }}
+        </p>
+        <p>
+          {{ cart.attributes.delivery_slot_partner }}
+        </p>
+      </div>
+      {% for item in cart.items %}
+        <div class="flex gap-x-4">
+          <img
+            src="{{ item.image | img_url: '100x100' }}"
+            alt="{{ item.title }}"
+            class="cart-item-thumbnail"
+            width="100"
+            height="100"
+          >
+          <div class="flex-1 flex flex-col">
+            <p>{{ item.title }}</p>
+            <p>Qty: {{ item.quantity }}</p>
+            <p>{{ item.final_line_price | money }}</p>
+          </div>
+        </div>
+      {% endfor %}
+      <div class="flex flex-col border-y border-gray-300 py-6 mb-6">
+        <div class="flex">
+          <div>Subtotal:</div>
+          <div class="ml-auto">{{ cart.items_subtotal_price | money }}</div>
+        </div>
+        <div class="flex">
+          <div>Delivery:</div>
+          <div class="ml-auto">Free Total</div>
+        </div>
+        <div class="flex typography--body-lg font-bold">
+          <div>Toal:</div>
+          <div class="ml-auto">{{ cart.total_price | money }}</div>
+        </div>
+      </div>
 
-  {%- if modal -%}
-    <button
-      id="slot-finder-close-x"
-      style="position:absolute; top:10px; right:10px; font-size:1.5em; background:none; border:none; cursor:pointer;"
-    >
-      &times;
-    </button>
-    <button id="slot-finder-close-btn" class="button button--secondary button--full-width" style="margin-top:1em;">
-      Close
-    </button>
+    {% else %}
+      <div class="flex flex-col">
+        <div class="relative w-full flex flex-col justify-center">
+          <img
+            class=""
+            src="{{ 'sign-up--postcode-box.webp' | asset_url }}"
+            alt="{{ cart.attributes.delivery_slot_day }}"
+            width="430"
+            height="430"
+            loading="lazy"
+            decoding="async"
+          >
+          <div
+            class="typography--h3 text-center text-white p-2.5 absolute left-1/5 -translate-x-1/5 whitespace-nowrap top-1/2 translate-y-[-20%] -rotate-[2deg] px-10 capitalize"
+            style="background-image: url('{{ 'home--black-band.webp' | asset_url }}');"
+          >
+            {{ cart.attributes.delivery_slot_day }}
+          </div>
+          <div
+            class="typography--h6 text-center text-white p-2.5 absolute left-3/4 -translate-x-3/4 whitespace-nowrap top-1/2 translate-y-[100%] px-5"
+            style="background-image: url('{{ 'home--black-band.webp' | asset_url }}');"
+          >
+            is your delivery day!
+          </div>
+        </div>
+        <div class="bg-[#f2ede3] px-10 py-5 flex flex-col text-center">
+          <h3 class="typography--h6">Delivery slot details:</h3>
+          <p>
+            {{ cart.attributes.delivery_slot_postcode }}
+          </p>
+          <p>
+            <span class="capitalize">
+              {{ cart.attributes.delivery_slot_day }}
+            </span>
+            - {{ cart.attributes.delivery_slot_time }}
+          </p>
+          <p>
+            {{ cart.attributes.delivery_slot_partner }}
+          </p>
+        </div>
+      </div>
+    {%- endif -%}
+
+  {% else %}
+    <div id="js-no-results" class="flex flex-col gap-8">
+      <h3 class="!italic typography--h8 text-center">
+        Find out your delivery day<br>
+        to start shopping...
+      </h3>
+      <form id="postcode-form" class="flex flex-col items-center gap-8">
+        <div class="w-full">
+          <label htmlFor="postcode-input" class="block typography--body-sm">Postcode</label>
+          <input
+            type="text"
+            id="postcode-input"
+            name="postcode"
+            placeholder="e.g., SW1A 1AA"
+            required
+            class="border w-full border-gray-400 p-2 bg-gray-100 rounded-sm"
+          >
+        </div>
+        <button
+          type="submit"
+          class="button button--secondary !bg-[#a30062] hover:!bg-[#c20075] !text-white"
+        >
+          Show my delivery day
+        </button>
+        <p>Or <span class="underline">sign in</span> to your account</p>
+      </form>
+    </div>
   {%- endif -%}
 </div>
 
@@ -53,6 +137,7 @@
     const postcode = document.getElementById('postcode-input').value.trim();
     const resultsDiv = document.getElementById('slot-results');
     const openerBtn = document.querySelector('#OpenSlotFiner');
+    const noResultContainer = document.querySelector('#js-no-results');
 
     try {
       const response = await fetch(`/apps/slot/slotFinder?postcode=${encodeURIComponent(postcode)}`);
@@ -104,7 +189,13 @@
             <td class="py-4 px-2">${slot.partner?.contactEmail || 'N/A'}</td>
             <td class="py-4 px-2"><button type="button" class="select-button button button--secondary !bg-[#f3f3f3] hover:!bg-[#e0e0e0]" data-slot-id="${
               slot.id
-            }">Select</button></td>
+            }"
+            data-slot-day="${slot.day}"
+            data-slot-timewindow="${slot.timeWindow}"
+            data-slot-partner="${slot.partner?.name || 'N/A'}"
+            data-slot-partneremail="${slot.partner?.contactEmail || 'N/A'}"
+            data-slot-postcode="${postcode}"
+            >Select</button></td>
           </tr>
         `
         )
@@ -122,13 +213,133 @@
 
       resultsDiv.querySelectorAll('.select-button').forEach((btn) => {
         btn.addEventListener('click', async function () {
+          const slotDay = this.getAttribute('data-slot-day');
+          const slotTime = this.getAttribute('data-slot-timewindow');
+          const slotParner = this.getAttribute('data-slot-partner');
+          const slotParneremail = this.getAttribute('data-slot-partneremail');
+          const slotpostcode = this.getAttribute('data-slot-postcode');
           const slotId = this.getAttribute('data-slot-id');
           try {
-            await fetch('/cart/update.js', {
+            const response = await fetch('/cart/update.js', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ attributes: { delivery_slot_id: slotId } }),
+              body: JSON.stringify({
+                attributes: {
+                  delivery_slot_id: slotId,
+                  delivery_slot_day: slotDay,
+                  delivery_slot_time: slotTime,
+                  delivery_slot_partner: slotParner,
+                  delivery_slot_partneremail: slotParneremail,
+                  delivery_slot_postcode: postcode,
+                },
+              }),
             });
+            const data = await response.json();
+
+            // Log the response data
+            console.log('Cart update response:', data);
+
+            if (data.items.length === 0) {
+              noResultContainer.innerHTML = `
+                <div class="flex flex-col">
+                  <div class="relative w-full flex flex-col justify-center">
+                    <img
+                      class=""
+                      src="{{ 'sign-up--postcode-box.webp' | asset_url }}"
+                      alt="{{ data.attributes.delivery_slot_day }}"
+                      width="430"
+                      height="430"
+                      loading="lazy"
+                      decoding="async"
+                    >
+                    <div
+                      class="typography--h3 text-center text-white p-2.5 absolute left-1/5 -translate-x-1/5 whitespace-nowrap top-1/2 translate-y-[-20%] -rotate-[2deg] px-10 capitalize"
+                      style="background-image: url('{{ 'home--black-band.webp' | asset_url }}');"
+                    >
+                      ${data.attributes.delivery_slot_day}
+                    </div>
+                    <div
+                      class="typography--h6 text-center text-white p-2.5 absolute left-3/4 -translate-x-3/4 whitespace-nowrap top-1/2 translate-y-[100%] px-5"
+                      style="background-image: url('{{ 'home--black-band.webp' | asset_url }}');"
+                    >
+                      is your delivery day!
+                    </div>
+                  </div>
+                  <div class="bg-[#f2ede3] px-10 py-5 flex flex-col text-center">
+                    <h3 class="typography--h6">Delivery slot details:</h3>
+                    <p>
+                      ${data.attributes.delivery_slot_postcode}
+                    </p>
+                    <p>
+                      <span class="capitalize">
+                        ${data.attributes.delivery_slot_day}
+                      </span>
+                      - ${data.attributes.delivery_slot_time}
+                    </p>
+                    <p>
+                      ${data.attributes.delivery_slot_partner}
+                    </p>
+                  </div>
+                </div>
+              `;
+            } else {
+              noResultContainer.innerHTML = `
+                <h3 class="typography--h2 text-center">Your order</h3>
+                <div class="bg-[#f2ede3] px-10 py-5 flex flex-col text-center">
+                  <h3 class="typography--h6">Delivery slot details:</h3>
+                  <p>
+                    ${data.attributes.delivery_slot_postcode}
+                  </p>
+                  <p>
+                    <span class="capitalize">
+                      ${data.attributes.delivery_slot_day}
+                    </span>
+                    - ${data.attributes.delivery_slot_time}
+                  </p>
+                  <p>
+                    ${data.attributes.delivery_slot_partner}
+                  </p>
+                </div>
+                ${data.items
+                  .map(
+                    (item) => `
+                  <div class="flex gap-x-4">
+                    <img
+                      src="${item.image}" 
+                      alt="${item.title}"
+                      class="cart-item-thumbnail"
+                      width="100"
+                      height="100"
+                    >
+                    <div class="flex-1 flex flex-col">
+                      <p>${item.title}</p>
+                      <p>Qty: ${item.quantity}</p>
+                      <p>${(item.final_line_price / 100).toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                      })}</p>
+                    </div>
+                  </div>
+                `
+                  )
+                  .join('')}
+                <div class="flex flex-col border-y border-gray-300 py-6 mb-6">
+                  <div class="flex">
+                    <div>Subtotal:</div>
+                    <div class="ml-auto">${data.items_subtotal_price}</div>
+                  </div>
+                  <div class="flex">
+                    <div>Delivery:</div>
+                    <div class="ml-auto">Free Total</div>
+                  </div>
+                  <div class="flex typography--body-lg font-bold">
+                    <div>Total:</div>
+                    <div class="ml-auto">${data.total_price}</div>
+                  </div>
+                </div>
+              `;
+            }
+
             closeModal();
           } catch (err) {
             alert('Failed to add slot to cart.');

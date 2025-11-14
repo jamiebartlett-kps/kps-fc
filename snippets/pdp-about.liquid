@@ -1,0 +1,13 @@
+<div class="page-width">
+  <div class="w-full lg:w-[calc(100%_-_300px)] lg:w-[calc(100%_-_400px)] flex max-md:items-center md:gap-x-3 max-md:!pb-8">
+    <div class="flex flex-col gap-2 justify-center pr-10 pt-6 md:ml-auto">
+      {% assign about_object = product.metafields.custom.about.value %}
+      <h2 class="typography--h6">
+        {{ about_object.title }}
+      </h2>
+      <div class="[&>*]:flex [&>*]:flex-col [&>*]:gap-y-6 [&>*]:mb-20">
+        {{ about_object.description | metafield_tag }}
+      </div>
+    </div>
+  </div>
+</div>
