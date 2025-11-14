@@ -21,6 +21,7 @@
 {%- endstyle -%}
 
 <div class="w-full flex justify-center relative h-128 lg:h-256 overflow-hidden">
+  {% if product.metafields.custom.banner_image %}
   <img
     class="w-full h-full absolute top-0 left-0 object-cover"
     srcset="
@@ -44,6 +45,15 @@
     loading="lazy"
     decoding="async"
   >
+  {% else %}
+<img
+    class="w-full h-full absolute top-0 left-0 object-cover"
+    src="{{ product.metafields.custom.alt_banner_image}}"
+    alt="{{ product.title | escape }}"
+    width="1920"
+    height="1080"
+  >
+  {% endif %}
   <div class="w-full page-width z-10 flex flex-col justify-center max-md:items-center max-md:text-center">
     <h1 class="typography--h1 !text-white">
       {{ product.title }}
