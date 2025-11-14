@@ -1,0 +1,28 @@
+{% assign grower = product.metafields.custom.grower.value %}
+
+{% if grower != blank %}
+  <div class="page-width">
+    <div class="w-full lg:w-[calc(100%_-_300px)] lg:w-[calc(100%_-_400px)] pr-10">
+      <div
+        class="flex max-lg:items-center max-lg:flex-col max-md:items-center"
+        style="background-color: {{ block.settings.bg_color }};"
+      >
+        <img
+          class="w-1/2"
+          src="{{ grower.avatar.value | image_url: width: 500}}"
+          alt="{{ grower.name }}"
+          width="500"
+          height="500"
+        >
+        <div class="w-1/2 flex flex-col gap-y-6 p-10">
+          <p class="typography--body-md font-bold underline">
+            {{ product.metafields.custom.grow_verb }} by {{ grower.name }}, {{ grower.location }}
+          </p>
+          <p>
+            {{ grower.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

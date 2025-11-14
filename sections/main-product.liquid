@@ -84,6 +84,10 @@
           {% render 'pdp-about', block: block, product: product %}
         {% when 'pdp-gallery-block' %}
           {% render 'pdp-gallery', block: block, product: product %}
+        {% when 'pdp-origin-block' %}
+          {% render 'pdp-origin', block: block, product: product %}
+        {% when 'pdp-grower-block' %}
+          {% render 'pdp-grower', block: block, product: product %}
         {%- when 'text' -%}
           <p
             class="product__text inline-richtext{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"
@@ -670,6 +674,22 @@
     {
       "type": "pdp-gallery-block",
       "name": "PDP gallery block"
+    },
+    {
+      "type": "pdp-origin-block",
+      "name": "PDP origin block"
+    },
+    {
+      "type": "pdp-grower-block",
+      "name": "PDP grower block",
+      "settings": [
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color",
+          "default": "#f4f4f4"
+        }
+      ]
     },
     {
       "type": "text",

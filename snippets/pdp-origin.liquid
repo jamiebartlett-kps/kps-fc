@@ -1,0 +1,13 @@
+{% assign countries = product.metafields.shopify['country-of-origin'].value %}
+{% if countries != blank %}
+  <div class="page-width">
+    <div class="w-full lg:w-[calc(100%_-_300px)] lg:w-[calc(100%_-_400px)] flex max-md:items-center md:gap-x-3 max-md:!pb-8">
+      <div class="flex flex-col gap-2 justify-center pr-10 py-10">
+        <h2 class="typography--h6">Country of origin</h2>
+        {% for country in countries %}
+          <p>Produced in the {{ country.label }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}
