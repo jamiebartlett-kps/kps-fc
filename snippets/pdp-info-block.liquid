@@ -27,11 +27,17 @@
 >
   <div class="page-width w-full flex max-md:flex-col max-md:gap-y-3 max-md:items-center md:gap-x-3 max-md:!pb-8">
     {% assign grower = product.metafields.custom.grower.value %}
-    {% assign avatar = grower.avatar.value %}
+
+    {% if grower.avatar.value %}
+      {% assign avatar_src = grower.avatar.value | image_url: width: 100 %}
+    {% else %}
+      {% assign avatar_src = 'placeholder-avatar.svg' | asset_url %}
+    {% endif %}
+
     <div class="block w-28 h-28 md:w-20 md:h-20 relative shrink-0">
       <img
         class="js-pdp-grow-avatar rounded-full border-white border-2 absolute -top-5 right-0 w-full"
-        src="{{ avatar | image_url: width: 100 }}"
+        src="{{ avatar_src }}"
         alt="{{ grower.name }}"
         width="80"
         height="80"
@@ -50,10 +56,13 @@
       <p class="typography--body-sm font-bold max-md:text-center">
         {{ product.title }}
       </p>
-      <p class="typography--body-sm font-bold max-md:text-center">
-        {{ product.metafields.custom.grow_verb }} by {{ grower.name }}
-        {{ grower.location }}
-      </p>
+      {% if grower.name %}
+        <p class="typography--body-sm font-bold max-md:text-center">
+          {{ product.metafields.custom.grow_verb }}
+          by {{ grower.name }}
+          {{ grower.location }}
+        </p>
+      {% endif %}
     </div>
 
     <div class="flex max-md:flex-col gap-2 justify-center items-center md:ml-auto">
@@ -127,13 +136,13 @@
     const rect = infoBlock.getBoundingClientRect();
 
     if (rect.top <= 0) {
-      infoBlock.classList.add('h-28');
+      infoBlock.classList.add('!h-28');
       grower.classList.add('hidden');
       feature.classList.remove('hidden');
       findSlot.classList.remove('-top-10');
       findSlot.classList.add('top-0');
     } else {
-      infoBlock.classList.remove('h-28');
+      infoBlock.classList.remove('!h-28');
       grower.classList.remove('hidden');
       feature.classList.add('hidden');
       findSlot.classList.add('-top-10');
