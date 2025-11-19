@@ -552,7 +552,7 @@
     }
   },
   "custom":{
-    "delivery_schedule_html": "Your delivery<br> schedule",
-    "sign_in_html" : "Sign in or<br> create account"
+    "delivery_schedule_html": "Delivery<br> dates",
+    "sign_in_html" : "Sign in or<br> sign up"
   }
 }
