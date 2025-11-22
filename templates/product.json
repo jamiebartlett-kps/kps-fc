@@ -15,13 +15,21 @@
         "pdp_hero_banner_block_WMDe9G": {
           "type": "pdp-hero-banner-block",
           "settings": {
-            "text": "Text block"
+            "title": "<p>{{ product.title }}</p>",
+            "description": "{{ product.description }}",
+            "size": "small",
+            "font_size": "large",
+            "text_color": "#ffffff",
+            "background_color": "#d32066",
+            "border_color": "#ffffff",
+            "position": "top-right"
           }
         },
         "pdp_info_block_RXNkty": {
           "type": "pdp-info-block",
           "settings": {
-            "bg_color": "#ccd9c3"
+            "bg_color": "#ccd9c3",
+            "title": "<p>Find out your next delivery day to start shopping</p>"
           }
         },
         "pdp_about_block_VNKHHP": {
