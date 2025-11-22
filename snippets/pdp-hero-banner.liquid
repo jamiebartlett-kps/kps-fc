@@ -5,6 +5,44 @@
   }
 {%- endstyle -%}
 
+{% assign pos = block.settings.position %}
+{% assign size = block.settings.size %}
+{% assign font_size = block.settings.font_size %}
+{%- liquid
+  case pos
+    when 'top-left'
+      assign position_class = 'top-4 left-4 lg:top-10 lg:left-10'
+    when 'top-right'
+      assign position_class = 'top-4 right-4 lg:top-10 lg:right-10'
+    when 'bottom-left'
+      assign position_class = 'bottom-4 left-4 lg:bottom-10 lg:left-10'
+    when 'bottom-right'
+      assign position_class = 'bottom-4 right-4 lg:bottom-10 lgright-10'
+  endcase
+-%}
+
+{%- liquid
+  case size
+    when 'small'
+      assign size_class = 'w-24 h-24 lg:w-36 lg:h-36'
+    when 'medium'
+      assign size_class = 'w-32 h-32 lg:w-42 lg:h-42'
+    when 'large'
+      assign size_class = 'w-38 h-38 lg:w-48 lg:h-48'
+  endcase
+-%}
+
+{%- liquid
+  case font_size
+    when 'small'
+      assign font_size_class = 'typography--h4 lg:typography--h3'
+    when 'medium'
+      assign font_size_class = 'typography--h3 lg:typography--h2'
+    when 'large'
+      assign font_size_class = 'typography--h2 lg:typography--h1'
+  endcase
+-%}
+
 <div class="w-full flex justify-center relative h-128 lg:h-256 overflow-hidden">
   {% if product.metafields.custom.banner_image %}
     <img
@@ -39,12 +77,28 @@
       height="1080"
     >
   {% endif %}
-  <div class="w-full page-width z-10 flex flex-col justify-center max-md:items-center max-md:text-center text-white">
+  <div class="w-full page-width z-10 flex flex-col justify-center max-md:items-center max-md:text-center text-white relative">
     <h1 class="typography--h1 !text-white">
-      {{ product.title }}
+      {% if block.settings.title != blank %}
+        {{ block.settings.title }}
+      {% endif %}
     </h1>
     <div class="max-md:hidden typography--body-lg">
-      {{ product.description }}
+      {% if block.settings.description != blank %}
+        {{ block.settings.description }}
+      {% endif %}
     </div>
+    {% if product.metafields.custom.promotion_message != blank %}
+      <div
+        class="absolute rounded-full border-6 text-center flex justify-center items-center p-8 font-bold  rotate-12 {{ position_class }} {{ size_class }} {{ font_size_class }}"
+        style="
+          {% if block.settings.text_color != blank %}color: {{ block.settings.text_color }};{% endif %}
+          {% if block.settings.background_color != blank %}background-color: {{ block.settings.background_color }};{% endif %}
+          {% if block.settings.border_color != blank %}border-color: {{ block.settings.border_color }};{% endif %}
+        "
+      >
+        {{ product.metafields.custom.promotion_message }}
+      </div>
+    {% endif %}
   </div>
 </div>
