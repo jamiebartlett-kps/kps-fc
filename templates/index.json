@@ -9,6 +9,21 @@
  */
 {
   "sections": {
+    "177134070884c3df7e": {
+      "type": "apps",
+      "blocks": {
+        "2026_ai_hackathon_kps_hackathon_c8Pnkk": {
+          "type": "shopify://apps/2026-ai-hackathon/blocks/kps_hackathon/019c6c14-c6b5-74df-a7d6-b915fd3158b6",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "2026_ai_hackathon_kps_hackathon_c8Pnkk"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -164,6 +179,7 @@
     }
   },
   "order": [
+    "177134070884c3df7e",
     "image_banner",
     "collage",
     "video",
