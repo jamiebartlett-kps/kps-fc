@@ -14,7 +14,9 @@
       "blocks": {
         "2026_ai_hackathon_kps_hackathon_c8Pnkk": {
           "type": "shopify://apps/2026-ai-hackathon/blocks/kps_hackathon/019c6c14-c6b5-74df-a7d6-b915fd3158b6",
-          "settings": {}
+          "settings": {
+            "buttonText": "KPS Alfie"
+          }
         }
       },
       "block_order": [
