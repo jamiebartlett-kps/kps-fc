@@ -11,6 +11,21 @@
   "sections": {
     "177134070884c3df7e": {
       "type": "apps",
+      "blocks": {
+        "2026_ai_hackathon_kps_hackathon_qgytVf": {
+          "type": "shopify://apps/2026-ai-hackathon/blocks/kps_hackathon/019c6c14-c6b5-74df-a7d6-b915fd3158b6",
+          "settings": {
+            "assistantName": "KPS AI Assistant",
+            "welcomeMessage": "👋 Hi, there! You're chatting with an agent.",
+            "buttonText": "KPS Alfie",
+            "buttonColor": "#3b82f6",
+            "buttonForegroundColor": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "2026_ai_hackathon_kps_hackathon_qgytVf"
+      ],
       "settings": {
         "include_margins": true
       }
